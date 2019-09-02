@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"sort"
+	"strconv"
 )
 
 // merge combines the results of the many reduce jobs into a single output file
@@ -28,7 +29,15 @@ func (mr *Master) merge() {
 			if err != nil {
 				break
 			}
-			kvs[kv.Key] = kv.Value
+			if val, ok := kvs[kv.Key]; ok {
+				a, _ := strconv.Atoi(val)
+				b, _ := strconv.Atoi(kv.Value)
+				c := a + b
+				kvs[kv.Key] = strconv.Itoa(c)
+				//do something here
+			} else {
+				kvs[kv.Key] = kv.Value
+			}
 		}
 		file.Close()
 	}

@@ -48,6 +48,7 @@ func doMap(
 
 	//mycode begin readfile
 	//fmt.Printf("map: jobName:%s mapTaskNumber:%d R:%d map begin", jobName, mapTaskNumber, nReduce)
+
 	inputFile, inputError := os.Open(inFile)
 	if inputError != nil {
 		fmt.Println(inputError)
@@ -56,12 +57,14 @@ func doMap(
 	defer inputFile.Close()
 	inputReader := bufio.NewReader(inputFile)
 	contents := ""
+	lineCount := 0
 	for {
 		inputString, readerError := inputReader.ReadString('\n')
-		contents += inputString
 		if readerError == io.EOF {
 			break
 		}
+		contents += inputString
+		lineCount += 1
 	}
 	//invoke mapF generate keyvalue
 	kvs := mapF(inFile, contents)
