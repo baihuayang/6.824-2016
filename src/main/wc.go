@@ -45,7 +45,8 @@ func mapF(document string, value string) (res []mapreduce.KeyValue) {
 			}
 		}
 		if begin <= end {
-			kv := mapreduce.KeyValue{strings.ToLower(val[begin : end+1]), "1"}
+			// kv := mapreduce.KeyValue{strings.ToLower(val[begin : end+1]), "1"}
+			kv := mapreduce.KeyValue{val[begin : end+1], "1"}
 			// if "the" == strings.ToLower(val) {
 			// 	fmt.Println(valn)
 			// }
