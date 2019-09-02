@@ -16,38 +16,40 @@ func mapF(document string, value string) (res []mapreduce.KeyValue) {
 	// TODO: you have to write this function
 	// mycode
 	// trim
-	strs := strings.Split(value, "\n")
-	// fmt.Println(value)
-	// fmt.Println("######################")
-	for _, valn := range strs {
-		// fmt.Println(valn)
-		vals := strings.Split(valn, " ")
-		for _, val := range vals {
-			begin := 0
-			end := len(val) - 1
-			for begin <= end {
-				s := string([]rune(val)[begin])
-				if s >= "a" && s <= "z" || s >= "A" && s <= "Z" {
-					break
-				} else {
-					begin += 1
-				}
+
+	splitVal := strings.FieldsFunc(value, func(c rune) bool {
+		d := string(c)
+		if !(d >= "a" && d <= "z" || d >= "A" && d <= "Z") {
+			return true
+		}
+
+		return false
+	})
+	for _, val := range splitVal {
+		begin := 0
+		end := len(val) - 1
+		for begin <= end {
+			s := string([]rune(val)[begin])
+			if s >= "a" && s <= "z" || s >= "A" && s <= "Z" {
+				break
+			} else {
+				begin += 1
 			}
-			for begin <= end {
-				s := string([]rune(val)[end])
-				if s >= "a" && s <= "z" || s >= "A" && s <= "Z" {
-					break
-				} else {
-					end -= 1
-				}
+		}
+		for begin <= end {
+			s := string([]rune(val)[end])
+			if s >= "a" && s <= "z" || s >= "A" && s <= "Z" {
+				break
+			} else {
+				end -= 1
 			}
-			if begin <= end {
-				kv := mapreduce.KeyValue{strings.ToLower(val[begin : end+1]), "1"}
-				// if "the" == strings.ToLower(val) {
-				// 	fmt.Println(valn)
-				// }
-				res = append(res, kv)
-			}
+		}
+		if begin <= end {
+			kv := mapreduce.KeyValue{strings.ToLower(val[begin : end+1]), "1"}
+			// if "the" == strings.ToLower(val) {
+			// 	fmt.Println(valn)
+			// }
+			res = append(res, kv)
 		}
 	}
 	count := 0
