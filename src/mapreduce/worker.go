@@ -87,6 +87,7 @@ func RunWorker(MasterAddress string, me string,
 	for {
 		wk.Lock()
 		if wk.nRPC == 0 {
+			fmt.Printf("RunWorker %s exit\n", me)
 			wk.Unlock()
 			break
 		}

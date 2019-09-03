@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"sync"
 	"sync/atomic"
-	"time"
 )
 
 // schedule starts and waits for all tasks in the given phase (Map or Reduce).
@@ -37,13 +36,13 @@ func (mr *Master) schedule(phase jobPhase) {
 		for {
 			var worker string
 			worker = <-mr.registerChannel
-			fmt.Printf("mapwork %s\n", worker)
 			if worker == "done" {
 				break
 			}
 			go func() {
 				for {
 					t := atomic.AddInt32(&i, 1)
+					fmt.Printf("map worker = %s, t = %d\n", worker, t)
 					if t > int32(ntasks) {
 						break
 					}
@@ -57,10 +56,8 @@ func (mr *Master) schedule(phase jobPhase) {
 					if !call(worker, "Worker.DoTask", args, new(struct{})) {
 						fmt.Printf("mapworkfailed %s\n", worker)
 						t = atomic.AddInt32(&i, -1)
-						fmt.Printf("failed t = %d\n", t)
 						//recall after one seconds
-						time.Sleep(1e9)
-						// break
+						break
 					} else {
 						fmt.Printf("success t = %d\n", t)
 						wg.Done()
@@ -74,31 +71,27 @@ func (mr *Master) schedule(phase jobPhase) {
 	if phase == reducePhase {
 		fmt.Printf("workers num=%d\n", len(mr.workers))
 		fmt.Println("reduce begin")
-		for _, worker := range mr.workers {
-			// fmt.Printf("reduce worker=%s\n", worker)
-			go func() {
+		for _, val := range mr.workers {
+			fmt.Printf("reduce worker=%s\n", val)
+			go func(val string) {
 				for {
+					fmt.Printf("reduce4 worker=%s\n", val)
 					t := atomic.AddInt32(&i, 1)
-					// fmt.Printf("t = %d\n", t)
 					if t >= int32(ntasks) {
-						fmt.Println("reduce ntasks all done")
 						break
 					}
 					file := mr.files[t]
 					args := DoTaskArgs{"test", file, phase, int(i), nios}
 					//rpc worker possible have error
-					if !call(worker, "Worker.DoTask", args, new(struct{})) {
-						// fmt.Printf("111 workers num=%d\n", len(mr.workers))
-						//fmt.Println("worker is failed")
+					if !call(val, "Worker.DoTask", args, new(struct{})) {
 						t = atomic.AddInt32(&i, -1)
-						fmt.Printf("reduce failed t = %d\n", t)
-						time.Sleep(1e9)
-						// break
+						break
 					} else {
 						wg.Done()
 					}
 				}
-			}()
+			}(val)
+
 		}
 		wg.Wait()
 	}

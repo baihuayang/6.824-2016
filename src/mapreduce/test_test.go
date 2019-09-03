@@ -195,6 +195,7 @@ func TestManyFailures(t *testing.T) {
 			cleanup(mr)
 			break
 		default:
+			fmt.Printf("create worker = %d,%d\n", i, i+1)
 			// Start 2 workers each sec. The workers fail after 10 tasks
 			w := port("worker" + strconv.Itoa(i))
 			go RunWorker(mr.address, w, MapFunc, ReduceFunc, 10)
