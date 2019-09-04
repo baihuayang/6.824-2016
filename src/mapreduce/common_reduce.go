@@ -91,7 +91,7 @@ func doReduce(
 	sort.Strings(keys)
 	//fmt.Println("sort done")
 	mergeFile := mergeName(jobName, reduceTaskNumber)
-	//fmt.Printf("mergeFileName=%s\n", mergeFile)
+	// fmt.Printf("mergeFileName=%s\n", mergeFile)
 	file, _ := os.OpenFile(mergeFile, os.O_CREATE|os.O_WRONLY, 0666)
 	defer file.Close()
 	//enc := json.NewEncoder(file)
