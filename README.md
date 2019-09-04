@@ -1,8 +1,10 @@
 # 6.824-2016
 mit 6.824 distribution
 
-mepreduce:
-1/5  done
-2/5  process for single file and sum afte it by calulator answer is 168539 (solved,master_splitmerge.go has bug)
-     run all files answer is 108209
-     mit answer is 154024
+mepreduce: all done 5/5
+
+gfs: paper 
+     2.5 On the other hand ....    However ...
+     2.6.3 The master recovers ... 
+		how checkpoints implements???
+			save checkpoint status?? and recover subsequence log??? 
