@@ -51,7 +51,7 @@ func (mr *Master) schedule(phase jobPhase) {
 						break
 					}
 					file := mr.files[t]
-					args := DoTaskArgs{"test", file, phase, int(i), nios}
+					args := DoTaskArgs{"test", file, phase, int(t), nios}
 					//rpc worker possible have error
 					if !call(worker, "Worker.DoTask", args, new(struct{})) {
 						fmt.Printf("mapworkfailed %s\n", worker)
@@ -71,17 +71,51 @@ func (mr *Master) schedule(phase jobPhase) {
 	if phase == reducePhase {
 		fmt.Printf("workers num=%d\n", len(mr.workers))
 		fmt.Println("reduce begin")
+		//new worker
+		go func() {
+			for {
+				worker := <-mr.registerChannel
+				fmt.Printf("new worker arrived name = %s\n", worker)
+				if worker == "done" {
+					break
+				}
+				go func() {
+					for {
+						t := atomic.AddInt32(&i, 1)
+						fmt.Printf("reduce new worker = %s, t = %d\n", worker, t)
+						if t >= int32(ntasks) {
+							break
+						}
+						// if t == int32(ntasks) {
+						// 	mr.registerChannel <- "done"
+						// 	break
+						// }
+						file := mr.files[t]
+						args := DoTaskArgs{"test", file, phase, int(t), nios}
+						//rpc worker possible have error
+						if !call(worker, "Worker.DoTask", args, new(struct{})) {
+							t = atomic.AddInt32(&i, -1)
+							//recall after one seconds
+							break
+						} else {
+							wg.Done()
+						}
+					}
+				}()
+			}
+		}()
+		//use previous worker
 		for _, val := range mr.workers {
-			fmt.Printf("reduce worker=%s\n", val)
+			// fmt.Printf("reduce worker=%s\n", val)
 			go func(val string) {
 				for {
-					fmt.Printf("reduce4 worker=%s\n", val)
+					// fmt.Printf("reduce4 worker=%s\n", val)
 					t := atomic.AddInt32(&i, 1)
 					if t >= int32(ntasks) {
 						break
 					}
 					file := mr.files[t]
-					args := DoTaskArgs{"test", file, phase, int(i), nios}
+					args := DoTaskArgs{"test", file, phase, int(t), nios}
 					//rpc worker possible have error
 					if !call(val, "Worker.DoTask", args, new(struct{})) {
 						t = atomic.AddInt32(&i, -1)
@@ -91,9 +125,10 @@ func (mr *Master) schedule(phase jobPhase) {
 					}
 				}
 			}(val)
-
 		}
+
 		wg.Wait()
+		mr.registerChannel <- "done"
 	}
 
 	fmt.Printf("Schedule: %v phase done\n", phase)
