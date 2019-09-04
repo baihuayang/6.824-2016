@@ -69,13 +69,22 @@ func doMap(
 	//invoke mapF generate keyvalue
 	kvs := mapF(inFile, contents)
 	//generate intermediate filename
-	imFileName := reduceName(jobName, mapTaskNumber, int(ihash(contents))%nReduce)
+	//todo ihash use on key not all contents
+	// imFileName := reduceName(jobName, mapTaskNumber, int(ihash(contents))%nReduce)
 	//encode json and save on disk
-	file, _ := os.OpenFile(imFileName, os.O_CREATE|os.O_WRONLY, 0666)
-	defer file.Close()
-	enc := json.NewEncoder(file)
+	// file, _ := os.OpenFile(imFileName, os.O_CREATE|os.O_WRONLY, 0666)
+	// defer file.Close()
+	// enc := json.NewEncoder(file)
 	for _, kv := range kvs {
+		// fmt.Printf("mapTaskNumber =%d, reduceNumber=%d, key=%s\n", mapTaskNumber, int(ihash(kv.Key))%nReduce, kv.Key)
+		imFileName := reduceName(jobName, mapTaskNumber, int(ihash(kv.Key))%nReduce)
+		file, err := os.OpenFile(imFileName, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
+		if err != nil {
+			panic(err)
+		}
+		enc := json.NewEncoder(file)
 		enc.Encode(kv)
+		file.Close()
 	}
 	//fmt.Println("map done")
 
