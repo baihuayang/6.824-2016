@@ -26,39 +26,10 @@ func mapF(document string, value string) (res []mapreduce.KeyValue) {
 		return false
 	})
 	for _, val := range splitVal {
-		begin := 0
-		end := len(val) - 1
-		for begin <= end {
-			s := string([]rune(val)[begin])
-			if s >= "a" && s <= "z" || s >= "A" && s <= "Z" {
-				break
-			} else {
-				begin += 1
-			}
-		}
-		for begin <= end {
-			s := string([]rune(val)[end])
-			if s >= "a" && s <= "z" || s >= "A" && s <= "Z" {
-				break
-			} else {
-				end -= 1
-			}
-		}
-		if begin <= end {
-			// kv := mapreduce.KeyValue{strings.ToLower(val[begin : end+1]), "1"}
-			kv := mapreduce.KeyValue{val[begin : end+1], "1"}
-			// if "the" == strings.ToLower(val) {
-			// 	fmt.Println(valn)
-			// }
-			res = append(res, kv)
-		}
+		kv := mapreduce.KeyValue{val, "1"}
+		res = append(res, kv)
 	}
-	count := 0
-	for _, val := range res {
-		if "the" == val.Key {
-			count += 1
-		}
-	}
+
 	return res
 }
 
