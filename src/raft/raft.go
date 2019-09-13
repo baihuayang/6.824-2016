@@ -49,6 +49,16 @@ type Raft struct {
 	// Your data here.
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
+	currentTerm int
+	votedFor int
+	log []interface{}
+
+	commitIndex int
+	lastApplied int
+
+	//for leader
+	nextIndex []int
+	matchIndex []int
 
 }
 
@@ -98,6 +108,11 @@ func (rf *Raft) readPersist(data []byte) {
 //
 type RequestVoteArgs struct {
 	// Your data here.
+	// candidate's term
+	term int
+	candidateId int
+	lastLogIndex int
+	lastLogTerm int
 }
 
 //
@@ -105,13 +120,31 @@ type RequestVoteArgs struct {
 //
 type RequestVoteReply struct {
 	// Your data here.
+	//currentTeam
+	term int
+	voteGranted bool
 }
 
 //
 // example RequestVote RPC handler.
+// todo rpc needn't return value???
+// answer reply is rpc return
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here.
+	if args.term < rf.currentTerm {
+		reply.term = rf.currentTerm
+		reply.voteGranted = false
+		return
+	}
+	//todo  why rf.votedFor == args.candidateId works
+	if rf.votedFor ==  -1 || rf.votedFor == args.candidateId {
+		if args.term > rf.currentTerm || args.term == rf.currentTerm && args.lastLogIndex > len(rf.log) {
+			reply.term = rf.currentTerm
+			reply.voteGranted = true
+			return
+		}
+	}
 }
 
 //
