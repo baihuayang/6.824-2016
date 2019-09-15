@@ -17,13 +17,14 @@ package raft
 //   in the same server.
 //
 
-import "sync"
+import (
+	"sync"
+	"time"
+)
 import "labrpc"
 
 // import "bytes"
 // import "encoding/gob"
-
-
 
 //
 // as each Raft peer becomes aware that successive log entries are
@@ -50,16 +51,18 @@ type Raft struct {
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
 	currentTerm int
-	votedFor int
-	log []interface{}
+	votedFor    int
+	log         []interface{}
 
 	commitIndex int
 	lastApplied int
 
 	//for leader
-	nextIndex []int
+	nextIndex  []int
 	matchIndex []int
 
+	//heartbeat
+	heartbeatChan chan bool
 }
 
 // return currentTerm and whether this server
@@ -100,19 +103,16 @@ func (rf *Raft) readPersist(data []byte) {
 	// d.Decode(&rf.yyy)
 }
 
-
-
-
 //
 // example RequestVote RPC arguments structure.
 //
 type RequestVoteArgs struct {
 	// Your data here.
 	// candidate's term
-	term int
-	candidateId int
+	term         int
+	candidateId  int
 	lastLogIndex int
-	lastLogTerm int
+	lastLogTerm  int
 }
 
 //
@@ -121,14 +121,28 @@ type RequestVoteArgs struct {
 type RequestVoteReply struct {
 	// Your data here.
 	//currentTeam
-	term int
+	term        int
 	voteGranted bool
+}
+
+// append logs and heartbeats request
+type AppendEntriesArgs struct {
+	term         int
+	leaderId     int
+	prevLogIndex int
+	prevLogTerm  int
+	entries      []interface{}
+	leaderCommit int
+}
+
+// append logs and heartbeats reply
+type AppendEntriesReply struct {
+	term    int
+	success bool
 }
 
 //
 // example RequestVote RPC handler.
-// todo rpc needn't return value???
-// answer reply is rpc return
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here.
@@ -138,12 +152,31 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 		return
 	}
 	//todo  why rf.votedFor == args.candidateId works
-	if rf.votedFor ==  -1 || rf.votedFor == args.candidateId {
+	if rf.votedFor == -1 || rf.votedFor == args.candidateId {
 		if args.term > rf.currentTerm || args.term == rf.currentTerm && args.lastLogIndex > len(rf.log) {
 			reply.term = rf.currentTerm
 			reply.voteGranted = true
 			return
 		}
+	}
+}
+
+// appendEntres RPC handler
+func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
+	if len(args.entries) == 0 {
+		//heartbeats
+		//reset time for candidate
+		if args.term < rf.currentTerm {
+			reply.success = false
+			return
+		}
+		rf.heartbeatChan <- true
+		reply.term = rf.currentTerm
+		reply.success = true
+		return
+	} else {
+		//append entries
+
 	}
 }
 
@@ -169,6 +202,10 @@ func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *Request
 	return ok
 }
 
+func (rf *Raft) sendAppendEntries(server int, args AppendEntriesArgs, reply *AppendEntriesReply) bool {
+	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
+	return ok
+}
 
 //
 // the service using Raft (e.g. a k/v server) wants to start
@@ -184,10 +221,10 @@ func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *Request
 // the leader.
 //
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
+	//Start(command) asks Raft to start the processing to append the command to the replicated log
 	index := -1
 	term := -1
 	isLeader := true
-
 
 	return index, term, isLeader
 }
@@ -219,12 +256,24 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.peers = peers
 	rf.persister = persister
 	rf.me = me
-
+	rf.heartbeatChan = make(chan bool)
 	// Your initialization code here.
+	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
+	go func() {
+		for {
+			select {
+			case <-rf.heartbeatChan:
+				break
+			case <-time.After(1 * time.Second):
+				//go to candidate
+				break
+			}
+		}
+	}()
+
 
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
-
 
 	return rf
 }
