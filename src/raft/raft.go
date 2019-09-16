@@ -18,6 +18,7 @@ package raft
 //
 
 import (
+	"fmt"
 	"sync"
 	"time"
 )
@@ -36,6 +37,11 @@ type ApplyMsg struct {
 	Command     interface{}
 	UseSnapshot bool   // ignore for lab2; only used in lab3
 	Snapshot    []byte // ignore for lab2; only used in lab3
+}
+
+type LogEntry struct {
+	command interface{}
+	term    int
 }
 
 //
@@ -63,16 +69,22 @@ type Raft struct {
 
 	//heartbeat
 	heartbeatChan chan bool
+
+	//voted number by others
+	voteNumber int
+
+	//is leader
+	isLeader bool
 }
 
 // return currentTerm and whether this server
 // believes it is the leader.
 func (rf *Raft) GetState() (int, bool) {
 
-	var term int
-	var isleader bool
+	//var term int
+	//var isleader bool
 	// Your code here.
-	return term, isleader
+	return rf.currentTerm, rf.isLeader
 }
 
 //
@@ -145,19 +157,27 @@ type AppendEntriesReply struct {
 // example RequestVote RPC handler.
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
+	fmt.Println("RequestVote: ")
+	fmt.Println(args)
 	// Your code here.
 	if args.term < rf.currentTerm {
 		reply.term = rf.currentTerm
 		reply.voteGranted = false
+		fmt.Println("branch 1")
 		return
 	}
-	//todo  why rf.votedFor == args.candidateId works
+	//rf.votedFor == args.candidateId  (voted for itself)
 	if rf.votedFor == -1 || rf.votedFor == args.candidateId {
-		if args.term > rf.currentTerm || args.term == rf.currentTerm && args.lastLogIndex > len(rf.log) {
+		if args.term >= rf.currentTerm && args.lastLogIndex >= len(rf.log)-1 {
+			rf.votedFor = args.candidateId
 			reply.term = rf.currentTerm
 			reply.voteGranted = true
+			fmt.Println("branch 3")
 			return
+		} else {
+			fmt.Println("branch 2")
 		}
+
 	}
 }
 
@@ -261,16 +281,63 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
 	go func() {
 		for {
-			select {
-			case <-rf.heartbeatChan:
-				break
-			case <-time.After(1 * time.Second):
-				//go to candidate
-				break
+			if !rf.isLeader {
+				//candidate or follower code
+				select {
+				case <-rf.heartbeatChan:
+					break
+				case <-time.After(1 * time.Second):
+					//go to candidate
+					for i := 0; i < len(peers); i++ {
+						lastLogTerm := 0
+						lastLogIndex := len(rf.log) - 1
+						if lastLogIndex >= 0 {
+							lastLog := rf.log[lastLogIndex].(LogEntry)
+							lastLogTerm = lastLog.term
+						}
+						req := RequestVoteArgs{rf.currentTerm, me, lastLogIndex, lastLogTerm}
+						reply := RequestVoteReply{}
+						fmt.Println("sendRequestVote")
+						rf.sendRequestVote(i, req, &reply)
+						if reply.voteGranted {
+							rf.mu.Lock()
+							rf.voteNumber += 1
+							if rf.voteNumber > len(peers) {
+								//become leader
+								rf.isLeader = true
+								break
+							}
+							rf.mu.Unlock()
+						}
+					}
+					break
+				}
+			} else {
+				//leader code
+				time.Sleep(100 * time.Millisecond)
+				for i := 0; i < len(peers); i++ {
+					if i != me {
+						lastLogTerm := 0
+						lastLogIndex := len(rf.log) - 1
+						if lastLogIndex >= 0 {
+							lastLog := rf.log[lastLogIndex].(LogEntry)
+							lastLogTerm = lastLog.term
+						}
+						req := AppendEntriesArgs{
+							rf.currentTerm,
+							me,
+							lastLogIndex,
+							lastLogTerm,
+							nil,
+							rf.commitIndex}
+						reply := AppendEntriesReply{}
+						fmt.Println("sendAppendEntries")
+						rf.sendAppendEntries(i, req, &reply)
+					}
+				}
 			}
 		}
 	}()
-
 
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())

@@ -48,7 +48,10 @@ package labrpc
 //   pass svc to srv.AddService()
 //
 
-import "encoding/gob"
+import (
+	"encoding/gob"
+	"fmt"
+)
 import "bytes"
 import "reflect"
 import "sync"
@@ -94,6 +97,7 @@ func (e *ClientEnd) Call(svcMeth string, args interface{}, reply interface{}) bo
 
 	rep := <-req.replyCh
 	if rep.ok {
+		fmt.Println(rep)
 		rb := bytes.NewBuffer(rep.reply)
 		rd := gob.NewDecoder(rb)
 		if err := rd.Decode(reply); err != nil {
@@ -129,6 +133,8 @@ func MakeNetwork() *Network {
 	// single goroutine to handle all ClientEnd.Call()s
 	go func() {
 		for xreq := range rn.endCh {
+			fmt.Println("MakeNetwork")
+			fmt.Println(xreq)
 			go rn.ProcessReq(xreq)
 		}
 	}()
@@ -206,6 +212,7 @@ func (rn *Network) ProcessReq(req reqMsg) {
 		ech := make(chan replyMsg)
 		go func() {
 			r := server.dispatch(req)
+			fmt.Printf("server.dispatch %v \n", r)
 			ech <- r
 		}()
 
@@ -400,7 +407,7 @@ func MakeService(rcvr interface{}) *Service {
 		method := svc.typ.Method(m)
 		mtype := method.Type
 		mname := method.Name
-
+		//fmt.Printf("method:%v,mtype:%v,mname:%v \n",method, mtype, mname)
 		//fmt.Printf("%v pp %v ni %v 1k %v 2k %v no %v\n",
 		//	mname, method.PkgPath, mtype.NumIn(), mtype.In(1).Kind(), mtype.In(2).Kind(), mtype.NumOut())
 
@@ -439,7 +446,7 @@ func (svc *Service) dispatch(methname string, req reqMsg) replyMsg {
 		// call the method.
 		function := method.Func
 		function.Call([]reflect.Value{svc.rcvr, args.Elem(), replyv})
-
+		fmt.Printf("replyv %v \n", replyv)
 		// encode the reply.
 		rb := new(bytes.Buffer)
 		re := gob.NewEncoder(rb)
