@@ -50,7 +50,6 @@ package labrpc
 
 import (
 	"encoding/gob"
-	"fmt"
 )
 import "bytes"
 import "reflect"
@@ -97,7 +96,7 @@ func (e *ClientEnd) Call(svcMeth string, args interface{}, reply interface{}) bo
 
 	rep := <-req.replyCh
 	if rep.ok {
-		fmt.Println(rep)
+		//fmt.Println(rep)
 		rb := bytes.NewBuffer(rep.reply)
 		rd := gob.NewDecoder(rb)
 		if err := rd.Decode(reply); err != nil {
@@ -133,8 +132,8 @@ func MakeNetwork() *Network {
 	// single goroutine to handle all ClientEnd.Call()s
 	go func() {
 		for xreq := range rn.endCh {
-			fmt.Println("MakeNetwork")
-			fmt.Println(xreq)
+			//fmt.Println("MakeNetwork")
+			//fmt.Println(xreq)
 			go rn.ProcessReq(xreq)
 		}
 	}()
@@ -212,7 +211,7 @@ func (rn *Network) ProcessReq(req reqMsg) {
 		ech := make(chan replyMsg)
 		go func() {
 			r := server.dispatch(req)
-			fmt.Printf("server.dispatch %v \n", r)
+			//fmt.Printf("server.dispatch %v \n", r)
 			ech <- r
 		}()
 
@@ -446,7 +445,7 @@ func (svc *Service) dispatch(methname string, req reqMsg) replyMsg {
 		// call the method.
 		function := method.Func
 		function.Call([]reflect.Value{svc.rcvr, args.Elem(), replyv})
-		fmt.Printf("replyv %v \n", replyv)
+		//fmt.Printf("replyv %v \n", replyv)
 		// encode the reply.
 		rb := new(bytes.Buffer)
 		re := gob.NewEncoder(rb)

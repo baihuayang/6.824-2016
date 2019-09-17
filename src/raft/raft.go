@@ -121,10 +121,10 @@ func (rf *Raft) readPersist(data []byte) {
 type RequestVoteArgs struct {
 	// Your data here.
 	// candidate's term
-	term         int
-	candidateId  int
-	lastLogIndex int
-	lastLogTerm  int
+	Term         int
+	CandidateId  int
+	LastLogIndex int
+	LastLogTerm  int
 }
 
 //
@@ -133,66 +133,62 @@ type RequestVoteArgs struct {
 type RequestVoteReply struct {
 	// Your data here.
 	//currentTeam
-	term        int
-	voteGranted bool
+	Term        int
+	VoteGranted bool
 }
 
 // append logs and heartbeats request
 type AppendEntriesArgs struct {
-	term         int
-	leaderId     int
-	prevLogIndex int
-	prevLogTerm  int
-	entries      []interface{}
-	leaderCommit int
+	Term         int
+	LeaderId     int
+	PrevLogIndex int
+	PrevLogTerm  int
+	Entries      []interface{}
+	LeaderCommit int
 }
 
 // append logs and heartbeats reply
 type AppendEntriesReply struct {
-	term    int
-	success bool
+	Term    int
+	Success bool
 }
 
 //
 // example RequestVote RPC handler.
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
-	fmt.Println("RequestVote: ")
-	fmt.Println(args)
+	//fmt.Println("RequestVote: ")
+	//fmt.Println(args)
 	// Your code here.
-	if args.term < rf.currentTerm {
-		reply.term = rf.currentTerm
-		reply.voteGranted = false
+	if args.Term < rf.currentTerm {
+		reply.Term = rf.currentTerm
+		reply.VoteGranted = false
 		fmt.Println("branch 1")
 		return
 	}
 	//rf.votedFor == args.candidateId  (voted for itself)
-	if rf.votedFor == -1 || rf.votedFor == args.candidateId {
-		if args.term >= rf.currentTerm && args.lastLogIndex >= len(rf.log)-1 {
-			rf.votedFor = args.candidateId
-			reply.term = rf.currentTerm
-			reply.voteGranted = true
-			fmt.Println("branch 3")
+	if rf.votedFor == -1 || rf.votedFor == args.CandidateId {
+		if args.Term >= rf.currentTerm && args.LastLogIndex >= len(rf.log)-1 {
+			rf.votedFor = args.CandidateId
+			reply.Term = rf.currentTerm
+			reply.VoteGranted = true
 			return
-		} else {
-			fmt.Println("branch 2")
 		}
-
 	}
 }
 
 // appendEntres RPC handler
 func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
-	if len(args.entries) == 0 {
+	if len(args.Entries) == 0 {
 		//heartbeats
 		//reset time for candidate
-		if args.term < rf.currentTerm {
-			reply.success = false
+		if args.Term < rf.currentTerm {
+			reply.Success = false
 			return
 		}
 		rf.heartbeatChan <- true
-		reply.term = rf.currentTerm
-		reply.success = true
+		reply.Term = rf.currentTerm
+		reply.Success = true
 		return
 	} else {
 		//append entries
@@ -285,8 +281,10 @@ func Make(peers []*labrpc.ClientEnd, me int,
 				//candidate or follower code
 				select {
 				case <-rf.heartbeatChan:
+					fmt.Printf("server %d receive hb\n", me)
 					break
-				case <-time.After(1 * time.Second):
+				case <-time.After(1000 * time.Millisecond):
+					fmt.Printf("server %d not receive hb\n", me)
 					//go to candidate
 					for i := 0; i < len(peers); i++ {
 						lastLogTerm := 0
@@ -297,9 +295,9 @@ func Make(peers []*labrpc.ClientEnd, me int,
 						}
 						req := RequestVoteArgs{rf.currentTerm, me, lastLogIndex, lastLogTerm}
 						reply := RequestVoteReply{}
-						fmt.Println("sendRequestVote")
+						//fmt.Println("sendRequestVote")
 						rf.sendRequestVote(i, req, &reply)
-						if reply.voteGranted {
+						if reply.VoteGranted {
 							rf.mu.Lock()
 							rf.voteNumber += 1
 							if rf.voteNumber > len(peers) {
@@ -331,8 +329,11 @@ func Make(peers []*labrpc.ClientEnd, me int,
 							nil,
 							rf.commitIndex}
 						reply := AppendEntriesReply{}
-						fmt.Println("sendAppendEntries")
+						//fmt.Println("sendAppendEntries")
 						rf.sendAppendEntries(i, req, &reply)
+						if !reply.Success {
+							rf.isLeader = false
+						}
 					}
 				}
 			}

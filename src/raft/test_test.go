@@ -27,7 +27,8 @@ func TestInitialElection(t *testing.T) {
 	fmt.Printf("Test:  initial election ...\n")
 
 	// is a leader elected?
-	cfg.checkOneLeader()
+	leader := cfg.checkOneLeader()
+	fmt.Printf("leader is %v \n", leader)
 
 	// does the leader+term stay the same there is no failure?
 	term1 := cfg.checkTerms()
@@ -49,8 +50,15 @@ func TestReElection(t *testing.T) {
 
 	leader1 := cfg.checkOneLeader()
 
+	fmt.Printf("leader is %v \n", leader1)
+
 	// if the leader disconnects, a new one should be elected.
+	fmt.Println("leader is going to disconnect!!!")
+
 	cfg.disconnect(leader1)
+
+	fmt.Println("leader is disconnected!!!")
+
 	cfg.checkOneLeader()
 
 	// if the old leader rejoins, that shouldn't
