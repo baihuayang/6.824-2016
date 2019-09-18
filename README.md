@@ -14,3 +14,12 @@ gfs: paper
 		consistent but not defined : clients not see every mutation 
 
 gfs read done
+
+
+raft: paper
+
+lab: 
+initialElection done
+reElection processing  
+	Q: if leader is down, how to define the majority of new reElection? 
+

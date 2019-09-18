@@ -158,20 +158,19 @@ type AppendEntriesReply struct {
 // example RequestVote RPC handler.
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
-	fmt.Printf("RequestVote before lock: from %v for %v vote\n", args.CandidateId, rf.me)
-	fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
+	//fmt.Printf("RequestVote before lock: from %v for %v vote\n", args.CandidateId, rf.me)
+	//fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
 	rf.mu.Lock()
-	fmt.Printf("[Locked] RequestVote server %v\n", rf.me)
+	//fmt.Printf("[Locked] RequestVote server %v\n", rf.me)
 	defer rf.mu.Unlock()
-	defer fmt.Printf("[Unlocked] RequestVote server %v\n", rf.me)
-	fmt.Printf("RequestVote locked: from %v for %v vote\n", args.CandidateId, rf.me)
+	//defer fmt.Printf("[Unlocked] RequestVote server %v\n", rf.me)
+	//fmt.Printf("RequestVote locked: from %v for %v vote\n", args.CandidateId, rf.me)
 	//fmt.Println(args)
 	// Your code here.
 	if args.Term < rf.currentTerm {
 		reply.Term = rf.currentTerm
 		reply.VoteGranted = false
 		fmt.Printf("[get vote failed 1] server %v request with LastLogIndex = %v\n", args.CandidateId, args.LastLogIndex)
-		//rf.mu.Unlock()
 		return
 	}
 	//candidate begin a new term vote
@@ -183,7 +182,6 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 		rf.currentTerm = args.Term
 		// become follower(0)
 		rf.status = 0
-		//rf.mu.Unlock()
 		return
 	}
 	//vote for same term
@@ -193,7 +191,6 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 			reply.Term = rf.currentTerm
 			reply.VoteGranted = true
 			fmt.Printf("[get vote success] server %v request with LastLogIndex = %v\n", args.CandidateId, args.LastLogIndex)
-			//rf.mu.Unlock()
 			return
 		} else {
 			fmt.Printf("[get vote failed 2] server %v request with LastLogIndex = %v\n", args.CandidateId, args.LastLogIndex)
@@ -202,7 +199,6 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 		fmt.Printf("[get vote failed 3] server %v args.term %v rf.currentTerm %v request with LastLogIndex = %v and votor votedFor = %v\n",
 			args.CandidateId, args.Term, rf.currentTerm, args.LastLogIndex, rf.votedFor)
 	}
-	//rf.mu.Unlock()
 	return
 }
 
@@ -235,7 +231,6 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 		return
 	} else {
 		//append entries
-		fmt.Println("GGGGGGGGGGGGGGGGG")
 	}
 }
 
@@ -258,6 +253,7 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 //
 func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *RequestVoteReply) bool {
 	ok := rf.peers[server].Call("Raft.RequestVote", args, reply)
+	fmt.Printf("OK1?????? %v\n", ok)
 	return ok
 }
 
@@ -332,9 +328,12 @@ func Make(peers []*labrpc.ClientEnd, me int,
 					break
 				case <-time.After(ranN * time.Millisecond):
 					//go to candidate
+					rf.mu.Lock()
 					rf.currentTerm += 1
+					rf.votedFor = -1
 					//become candidate(1)
 					rf.status = 1
+					rf.mu.Unlock()
 					fmt.Printf("server %v not receive hb\n", me)
 					fmt.Printf("server %v term %v votefor wait %v time\n", me, rf.currentTerm, ranN * time.Millisecond)
 					for i := 0; i < len(peers); i++ {
@@ -350,9 +349,9 @@ func Make(peers []*labrpc.ClientEnd, me int,
 						rf.sendRequestVote(i, req, &reply)
 						fmt.Printf("server %v send vote request to server %v done\n", me, i)
 						if reply.VoteGranted {
-							fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
+							//fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
 							rf.mu.Lock()
-							fmt.Printf("[Locked] convert leader to follower server %v\n", rf.me)
+							//fmt.Printf("[Locked] convert leader to follower server %v\n", rf.me)
 							rf.voteNumber += 1
 							fmt.Printf("server %v get vote from server %v with rf.term = %v, reply.term = %v\n", me, i, rf.currentTerm, reply.Term)
 							fmt.Printf("server %v votenum = %v\n", me, rf.voteNumber)
@@ -361,11 +360,11 @@ func Make(peers []*labrpc.ClientEnd, me int,
 								rf.status = 2
 								fmt.Printf("server %v term %v become leader with vote num = %v\n", me, rf.currentTerm, rf.voteNumber)
 								rf.mu.Unlock()
-								fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
+								//fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
 								break
 							}
 							rf.mu.Unlock()
-							fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
+							//fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
 						} else {
 							fmt.Printf("server %v get reply term = %v, voteGranted = %v\n", me, reply.Term, reply.VoteGranted)
 						}
@@ -374,9 +373,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 				}
 			} else {
 				//leader code
-				fmt.Printf("server %v execute lead code sleep \n", me)
 				time.Sleep(50 * time.Millisecond)
-				fmt.Printf("server %v execute lead code awake \n", me)
 				for i := 0; i < len(peers); i++ {
 					if i != me {
 						lastLogTerm := 0
@@ -398,23 +395,24 @@ func Make(peers []*labrpc.ClientEnd, me int,
 						//rf must be leader
 						if rf.status == 2 {
 							fmt.Printf("server %v send hb to server %v and rf.status = %v\n", rf.me, i, rf.status)
-							fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
-							rf.mu.Lock()
-							fmt.Printf("[Locked] sendAppendEntries server %v\n", rf.me)
+							//fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
+							//todo why this need lock????
+							//rf.mu.Lock()
+							//fmt.Printf("[Locked] sendAppendEntries server %v\n", rf.me)
 							rf.sendAppendEntries(i, req, &reply)
-							rf.mu.Unlock()
-							fmt.Printf("[Unlocked] sendAppendEntries server %v\n", rf.me)
+							//rf.mu.Unlock()
+							//fmt.Printf("[Unlocked] sendAppendEntries server %v\n", rf.me)
 						}
 						fmt.Printf("server %v send hb to server %v done\n", me, i)
 						if !reply.Success {
 							fmt.Printf("server %v become follower from leader\n", me)
 							//become follower(0) from leader(2)
-							fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
+							//fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
 							rf.mu.Lock()
-							fmt.Printf("[Locked] convert leader to follower server %v\n", rf.me)
+							//fmt.Printf("[Locked] convert leader to follower server %v\n", rf.me)
 							rf.status = 0
 							rf.mu.Unlock()
-							fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
+							//fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
 						}
 					}
 				}

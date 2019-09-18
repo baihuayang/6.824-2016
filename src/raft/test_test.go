@@ -61,6 +61,7 @@ func TestReElection(t *testing.T) {
 
 	cfg.checkOneLeader()
 
+	fmt.Println("recover disconnected formor leader but now may not be a leader")
 	// if the old leader rejoins, that shouldn't
 	// disturb the old leader.
 	cfg.connect(leader1)
