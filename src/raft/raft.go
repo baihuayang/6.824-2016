@@ -19,6 +19,7 @@ package raft
 
 import (
 	"fmt"
+	"math/rand"
 	"sync"
 	"time"
 )
@@ -73,8 +74,8 @@ type Raft struct {
 	//voted number by others
 	voteNumber int
 
-	//is leader
-	isLeader bool
+	//leader:2  candidate:1  follower:0
+	status int
 }
 
 // return currentTerm and whether this server
@@ -84,7 +85,7 @@ func (rf *Raft) GetState() (int, bool) {
 	//var term int
 	//var isleader bool
 	// Your code here.
-	return rf.currentTerm, rf.isLeader
+	return rf.currentTerm, rf.status == 2
 }
 
 //
@@ -157,42 +158,84 @@ type AppendEntriesReply struct {
 // example RequestVote RPC handler.
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
-	//fmt.Println("RequestVote: ")
+	fmt.Printf("RequestVote before lock: from %v for %v vote\n", args.CandidateId, rf.me)
+	fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
+	rf.mu.Lock()
+	fmt.Printf("[Locked] RequestVote server %v\n", rf.me)
+	defer rf.mu.Unlock()
+	defer fmt.Printf("[Unlocked] RequestVote server %v\n", rf.me)
+	fmt.Printf("RequestVote locked: from %v for %v vote\n", args.CandidateId, rf.me)
 	//fmt.Println(args)
 	// Your code here.
 	if args.Term < rf.currentTerm {
 		reply.Term = rf.currentTerm
 		reply.VoteGranted = false
-		fmt.Println("branch 1")
+		fmt.Printf("[get vote failed 1] server %v request with LastLogIndex = %v\n", args.CandidateId, args.LastLogIndex)
+		//rf.mu.Unlock()
 		return
 	}
-	//rf.votedFor == args.candidateId  (voted for itself)
+	//candidate begin a new term vote
+	if args.Term > rf.currentTerm {
+		fmt.Printf("[get vote success] server %v request with LastLogIndex = %v\n", args.CandidateId, args.LastLogIndex)
+		reply.Term = rf.currentTerm
+		reply.VoteGranted = true
+		rf.votedFor = args.CandidateId
+		rf.currentTerm = args.Term
+		// become follower(0)
+		rf.status = 0
+		//rf.mu.Unlock()
+		return
+	}
+	//vote for same term
 	if rf.votedFor == -1 || rf.votedFor == args.CandidateId {
 		if args.Term >= rf.currentTerm && args.LastLogIndex >= len(rf.log)-1 {
 			rf.votedFor = args.CandidateId
 			reply.Term = rf.currentTerm
 			reply.VoteGranted = true
+			fmt.Printf("[get vote success] server %v request with LastLogIndex = %v\n", args.CandidateId, args.LastLogIndex)
+			//rf.mu.Unlock()
 			return
+		} else {
+			fmt.Printf("[get vote failed 2] server %v request with LastLogIndex = %v\n", args.CandidateId, args.LastLogIndex)
 		}
+	}else{
+		fmt.Printf("[get vote failed 3] server %v args.term %v rf.currentTerm %v request with LastLogIndex = %v and votor votedFor = %v\n",
+			args.CandidateId, args.Term, rf.currentTerm, args.LastLogIndex, rf.votedFor)
 	}
+	//rf.mu.Unlock()
+	return
 }
 
 // appendEntres RPC handler
+//todo think need lock???
 func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
 	if len(args.Entries) == 0 {
 		//heartbeats
 		//reset time for candidate
 		if args.Term < rf.currentTerm {
+			fmt.Printf("[heartBeat: server %v hb failed] for term is not latest, args.term %v, rf.term %v\n",
+				args.LeaderId, args.Term, rf.currentTerm)
 			reply.Success = false
 			return
 		}
+		fmt.Printf("[heartBeat: server %v receive hb] chan sending\n", rf.me)
+		// todo can rf.heartbeatChan <- true use go routines???
+		//go func(){
 		rf.heartbeatChan <- true
+		//}()
+		fmt.Printf("server %v hb chan sending done\n", rf.me)
 		reply.Term = rf.currentTerm
 		reply.Success = true
+
+		if rf.currentTerm < args.Term {
+			rf.currentTerm = args.Term
+		}
+		//anyway become follower
+		rf.status = 0
 		return
 	} else {
 		//append entries
-
+		fmt.Println("GGGGGGGGGGGGGGGGG")
 	}
 }
 
@@ -274,18 +317,26 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.me = me
 	rf.heartbeatChan = make(chan bool)
 	// Your initialization code here.
+	rf.votedFor = -1
 	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
 	go func() {
 		for {
-			if !rf.isLeader {
+			if !(rf.status == 2) {
+				rand.Seed(time.Now().UnixNano())
+				// 150ms - 300ms random
+				ranN := time.Duration(rand.Intn(150) + 150)
 				//candidate or follower code
 				select {
 				case <-rf.heartbeatChan:
 					fmt.Printf("server %d receive hb\n", me)
 					break
-				case <-time.After(1000 * time.Millisecond):
-					fmt.Printf("server %d not receive hb\n", me)
+				case <-time.After(ranN * time.Millisecond):
 					//go to candidate
+					rf.currentTerm += 1
+					//become candidate(1)
+					rf.status = 1
+					fmt.Printf("server %v not receive hb\n", me)
+					fmt.Printf("server %v term %v votefor wait %v time\n", me, rf.currentTerm, ranN * time.Millisecond)
 					for i := 0; i < len(peers); i++ {
 						lastLogTerm := 0
 						lastLogIndex := len(rf.log) - 1
@@ -295,24 +346,37 @@ func Make(peers []*labrpc.ClientEnd, me int,
 						}
 						req := RequestVoteArgs{rf.currentTerm, me, lastLogIndex, lastLogTerm}
 						reply := RequestVoteReply{}
-						//fmt.Println("sendRequestVote")
+						fmt.Printf("server %v send vote request to server %v\n", me, i)
 						rf.sendRequestVote(i, req, &reply)
+						fmt.Printf("server %v send vote request to server %v done\n", me, i)
 						if reply.VoteGranted {
+							fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
 							rf.mu.Lock()
+							fmt.Printf("[Locked] convert leader to follower server %v\n", rf.me)
 							rf.voteNumber += 1
-							if rf.voteNumber > len(peers) {
-								//become leader
-								rf.isLeader = true
+							fmt.Printf("server %v get vote from server %v with rf.term = %v, reply.term = %v\n", me, i, rf.currentTerm, reply.Term)
+							fmt.Printf("server %v votenum = %v\n", me, rf.voteNumber)
+							if rf.voteNumber > len(peers)/2 {
+								//become leader  status = 2
+								rf.status = 2
+								fmt.Printf("server %v term %v become leader with vote num = %v\n", me, rf.currentTerm, rf.voteNumber)
+								rf.mu.Unlock()
+								fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
 								break
 							}
 							rf.mu.Unlock()
+							fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
+						} else {
+							fmt.Printf("server %v get reply term = %v, voteGranted = %v\n", me, reply.Term, reply.VoteGranted)
 						}
 					}
 					break
 				}
 			} else {
 				//leader code
-				time.Sleep(100 * time.Millisecond)
+				fmt.Printf("server %v execute lead code sleep \n", me)
+				time.Sleep(50 * time.Millisecond)
+				fmt.Printf("server %v execute lead code awake \n", me)
 				for i := 0; i < len(peers); i++ {
 					if i != me {
 						lastLogTerm := 0
@@ -330,9 +394,27 @@ func Make(peers []*labrpc.ClientEnd, me int,
 							rf.commitIndex}
 						reply := AppendEntriesReply{}
 						//fmt.Println("sendAppendEntries")
-						rf.sendAppendEntries(i, req, &reply)
+						//fmt.Printf("server %v send hb to server %v and rf.status = %v\n", me, i, rf.status)
+						//rf must be leader
+						if rf.status == 2 {
+							fmt.Printf("server %v send hb to server %v and rf.status = %v\n", rf.me, i, rf.status)
+							fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
+							rf.mu.Lock()
+							fmt.Printf("[Locked] sendAppendEntries server %v\n", rf.me)
+							rf.sendAppendEntries(i, req, &reply)
+							rf.mu.Unlock()
+							fmt.Printf("[Unlocked] sendAppendEntries server %v\n", rf.me)
+						}
+						fmt.Printf("server %v send hb to server %v done\n", me, i)
 						if !reply.Success {
-							rf.isLeader = false
+							fmt.Printf("server %v become follower from leader\n", me)
+							//become follower(0) from leader(2)
+							fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
+							rf.mu.Lock()
+							fmt.Printf("[Locked] convert leader to follower server %v\n", rf.me)
+							rf.status = 0
+							rf.mu.Unlock()
+							fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
 						}
 					}
 				}
