@@ -264,7 +264,10 @@ func (cfg *config) checkOneLeader() int {
 		for i := 0; i < cfg.n; i++ {
 			if cfg.connected[i] {
 				if t, leader := cfg.rafts[i].GetState(); leader {
+					fmt.Printf("[CheckOneLeader] server %v is leader\n", i)
 					leaders[t] = append(leaders[t], i)
+				}else{
+					fmt.Printf("[CheckOneLeader] server %v is not leader\n", i)
 				}
 			}
 		}
