@@ -77,6 +77,7 @@ func TestReElection(t *testing.T) {
 
 	// if a quorum arises, it should elect a leader.
 	fmt.Println("[STEP 3]")
+	fmt.Printf("[STEP 3] recover server %v\n", (leader2 + 1) % servers)
 	cfg.connect((leader2 + 1) % servers)
 	cfg.checkOneLeader()
 
