@@ -1,6 +1,7 @@
 #!/bin/sh
 >result.txt
-rm -f logs/*
+mv logs/success/* logs/bak/success
+mv logs/fail/* logs/bak/fail
 if [ "$#" -ne 1 ]; then
     echo "Usage: args number must be 1"
     exit 1
@@ -18,10 +19,12 @@ do
    okRes=`grep 'ok' tmp.txt | grep 'raft'`
    #echo $okRes 
    if [ ! -z "$okRes" ]; then
+       successTxt=$1_success_$i.log
+       cp tmp.txt logs/success/$successTxt
        succeedCount=$(($succeedCount+1))
    else
        errTxt=$1_error_$i.log
-       cp tmp.txt logs/$errTxt
+       cp tmp.txt logs/fail/$errTxt
    fi
    echo "Test $i done"
 done

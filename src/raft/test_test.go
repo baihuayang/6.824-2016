@@ -55,7 +55,7 @@ func TestReElection(t *testing.T) {
 	fmt.Println("leader is going to disconnect!!!")
 
 	cfg.disconnect(leader1)
-
+	start := time.Now()
 	fmt.Println("leader is disconnected!!!")
 	cfg.checkOneLeader()
 
@@ -64,6 +64,7 @@ func TestReElection(t *testing.T) {
 	fmt.Println("[STEP 1]")
 	cfg.connect(leader1)
 	fmt.Printf("recover disconnected leader %v but now may not be a leader\n", leader1)
+	fmt.Printf("server %v disconnected last %v time", leader1, time.Since(start))
 	leader2 := cfg.checkOneLeader()
 	// if there's no quorum, no leader should
 	// be elected.

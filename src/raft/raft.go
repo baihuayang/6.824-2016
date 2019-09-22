@@ -385,16 +385,16 @@ func beginHeartBeat(i int, me int, rf *Raft, wg *sync.WaitGroup) {
 			start := time.Now()
 			responseOk := rf.sendAppendEntries(i, req, &reply)
 			if responseOk {
-				fmt.Printf("%s took %v\n", "<sendAppendEntries Success>", time.Since(start))
+				fmt.Printf("[heartBeat success from %v to %v] <sendAppendEntries Failed> took %v\n",rf.me, me, time.Since(start))
 				fmt.Printf("server %v term %v send hb to server %v done\n", me, rf.currentTerm, i)
 				if !reply.Success {
-					fmt.Printf("server %v become follower from leader\n", me)
 					rf.mu.Lock()
+					fmt.Printf("server %v become follower from leader\n", me)
 					rf.status = 0
 					rf.mu.Unlock()
 				}
 			} else {
-				fmt.Printf("%s took %v\n", "<sendAppendEntries Failed>", time.Since(start))
+				fmt.Printf("[heartBeat failed from %v to %v] <sendAppendEntries Failed> took %v\n",rf.me, me, time.Since(start))
 			}
 		}
 	}

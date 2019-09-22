@@ -1,0 +1,2412 @@
+Test: election after network failure ...
+server 1 term 0 not receive hb
+server 1 term 1 votefor wait 184ms time
+server 1 send vote request to server 2
+server 1 send vote request to server 0
+server 1 send vote request to server 1
+[get vote success] server 1 request with LastLogIndex = -1
+[back to follower] server 2
+[get vote success] server 1 request with LastLogIndex = -1
+[back to follower] server 0
+[get vote success] server 1 request with LastLogIndex = -1
+OK1?????? from server 1 to server 2 : true
+OK1?????? from server 1 to server 0 : true
+server 1 send vote request to server 0 done
+server 1 send vote request to server 2 done
+<sendRequestVote Successed> took 2.227843ms
+server 1 get vote from server 0 with rf.term = 1, reply.term = 0
+server 1 votenum = 1
+<sendRequestVote Successed> took 2.389179ms
+server 1 get vote from server 2 with rf.term = 1, reply.term = 0
+server 1 votenum = 2
+server 1 term 1 become leader with vote num = 2
+OK1?????? from server 1 to server 1 : true
+server 1 send vote request to server 1 done
+<sendRequestVote Successed> took 2.199785ms
+server 1 get vote from server 1 with rf.term = 1, reply.term = 1
+server 1 votenum = 3
+server 1 term 1 become leader with vote num = 3
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.322196ms
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.630395ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 1.504946ms
+server 1 term 1 send hb to server 0 done
+<sendAppendEntries Success> took 1.445882ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 2 term 1 receive hb
+server 0 become a follower
+server 2 become a follower
+<sendAppendEntries Success> took 1.182885ms
+server 1 term 1 send hb to server 0 done
+<sendAppendEntries Success> took 1.29706ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 become a follower
+server 2 term 1 receive hb
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.04645ms
+server 1 term 1 send hb to server 0 done
+<sendAppendEntries Success> took 1.325106ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+<sendAppendEntries Success> took 860.73µs
+server 1 term 1 send hb to server 2 done
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.077258ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 2 term 1 receive hb] chan sending
+<sendAppendEntries Success> took 789.016µs
+server 2 term 1 receive hb
+server 1 term 1 send hb to server 0 done
+server 2 become a follower
+<sendAppendEntries Success> took 1.111487ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 2 term 1 receive hb
+server 0 become a follower
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 931.405µs
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.001164ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 749.868µs
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 919.689µs
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.342104ms
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.70295ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 2 become a follower
+server 0 become a follower
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 1.067526ms
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.389617ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 1.328836ms
+server 1 term 1 send hb to server 2 done
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.357977ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 953.549µs
+server 0 term 1 receive hb
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.104651ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 0 term 1 receive hb
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 1.077579ms
+server 1 term 1 send hb to server 0 done
+<sendAppendEntries Success> took 1.031017ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 976.194µs
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 920.209µs
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.042124ms
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.029317ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 964.331µs
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.026496ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.087878ms
+<sendAppendEntries Success> took 1.05434ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+<sendAppendEntries Success> took 852.789µs
+server 1 term 1 send hb to server 2 done
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.040043ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 926.803µs
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.10062ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.13518ms
+server 1 term 1 send hb to server 0 done
+<sendAppendEntries Success> took 1.320819ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 810.372µs
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 706.48µs
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.099064ms
+<sendAppendEntries Success> took 1.28666ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 992.948µs
+server 1 term 1 send hb to server 2 done
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 994.34µs
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 0 term 1 receive hb
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 1.039787ms
+server 1 term 1 send hb to server 0 done
+<sendAppendEntries Success> took 1.143152ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.028833ms
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.202855ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 1.020749ms
+server 1 term 1 send hb to server 0 done
+<sendAppendEntries Success> took 1.082014ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 1.127315ms
+server 1 term 1 send hb to server 2 done
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.218313ms
+server 1 term 1 send hb to server 0 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 813.504µs
+server 1 term 1 send hb to server 0 done
+<sendAppendEntries Success> took 1.021061ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 0 term 1 receive hb
+server 2 term 1 receive hb
+<sendAppendEntries Success> took 1.165355ms
+server 1 term 1 send hb to server 0 done
+<sendAppendEntries Success> took 1.347368ms
+server 1 term 1 send hb to server 2 done
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 2 term 1 receive hb] chan sending
+server 2 become a follower
+server 2 term 1 receive hb
+server 0 become a follower
+server 0 term 1 receive hb
+<sendAppendEntries Success> took 1.201459ms
+server 1 term 1 send hb to server 2 done
+<sendAppendEntries Success> took 1.542742ms
+server 1 term 1 send hb to server 0 done
+[CheckOneLeader] server 0 is not leader
+[CheckOneLeader] server 1 is leader
+[CheckOneLeader] server 2 is not leader
+leader is 1 
+leader is going to disconnect!!!
+leader is disconnected!!!
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 48.429485ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 8.370717ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 0 term 1 not receive hb
+server 0 term 2 votefor wait 184ms time
+server 0 send vote request to server 2
+server 0 send vote request to server 0
+server 0 send vote request to server 1
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[get vote success] server 0 request with LastLogIndex = -1
+[get vote success] server 0 request with LastLogIndex = -1
+[back to follower] server 2
+OK1?????? from server 0 to server 0 : true
+server 0 send vote request to server 0 done
+<sendRequestVote Successed> took 1.092876ms
+server 0 get vote from server 0 with rf.term = 2, reply.term = 2
+OK1?????? from server 0 to server 2 : true
+server 0 send vote request to server 2 done
+<sendRequestVote Successed> took 1.25989ms
+server 0 votenum = 1
+server 0 get vote from server 2 with rf.term = 2, reply.term = 1
+server 0 votenum = 2
+server 0 term 2 become leader with vote num = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 2 not receive hb
+server 2 term 3 votefor wait 214ms time
+server 2 send vote request to server 2
+server 2 send vote request to server 0
+server 2 send vote request to server 1
+[get vote success] server 2 request with LastLogIndex = -1
+[get vote success] server 2 request with LastLogIndex = -1
+[back to follower] server 0
+OK1?????? from server 2 to server 2 : true
+OK1?????? from server 2 to server 0 : true
+server 2 send vote request to server 0 done
+<sendRequestVote Successed> took 1.054335ms
+server 2 get vote from server 0 with rf.term = 3, reply.term = 2
+server 2 votenum = 1
+server 2 send vote request to server 2 done
+<sendRequestVote Successed> took 1.250267ms
+server 2 get vote from server 2 with rf.term = 3, reply.term = 3
+server 2 votenum = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 become leader with vote num = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+OK1?????? from server 2 to server 1 : false
+server 2 send vote request to server 1 done
+<sendRequestVote Failed> took 4.448087ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 167.276326ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[CheckOneLeader] server 0 is not leader
+[CheckOneLeader] server 2 is leader
+[STEP 1]
+recover disconnected leader 1 but now may not be a leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 895.786µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 1.052055ms
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 1.090503ms
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 970.911µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 828.493µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 688.337µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 918.616µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 780.593µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 734.083µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 1.245952ms
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 831.187µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 205.354612ms
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 1.13796ms
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 946.935µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 1.010186ms
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 158.215936ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 672.733µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 635.909µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 699.887µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 875.238µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 884.845µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 901.425µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 834.223µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 1.044202ms
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 765.87µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 747.322µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 816.733µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 533.286156ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 629.825µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 827.021µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 365.371393ms
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 914.848µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+<sendAppendEntries Failed> took 329.272638ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 431.322091ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 726.274µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 679.984µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 860.314µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 1.055034ms
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 618.246557ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 778.581µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 699.314µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 826.899µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 884.083µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 730.607µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 752.798µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 682.428µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 861.312µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 744.137µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 708.934µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 658.139µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 651.079µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 572.364µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 910.311µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+<sendAppendEntries Success> took 826.136µs
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Success> took 1.209451ms
+server 1 term 1 send hb to server 2 done
+server 1 become follower from leader
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+[CheckOneLeader] server 0 is not leader
+[CheckOneLeader] server 1 is leader
+[CheckOneLeader] server 2 is leader
+[STEP 2]
+2 0 have been disconnected
+<sendAppendEntries Failed> took 601.385089ms
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.197775ms
+<sendAppendEntries Failed> took 401.292383ms
+<sendAppendEntries Failed> took 501.009833ms
+<sendAppendEntries Failed> took 500.978039ms
+<sendAppendEntries Failed> took 300.709863ms
+<sendAppendEntries Failed> took 400.8786ms
+<sendAppendEntries Failed> took 400.803733ms
+<sendAppendEntries Failed> took 300.471959ms
+<sendAppendEntries Failed> took 200.490435ms
+<sendAppendEntries Failed> took 300.515078ms
+<sendAppendEntries Failed> took 200.344873ms
+<sendAppendEntries Failed> took 200.471745ms
+<sendAppendEntries Failed> took 100.228589ms
+<sendAppendEntries Failed> took 701.433814ms
+<sendAppendEntries Failed> took 100.370005ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 500.946974ms
+<sendAppendEntries Failed> took 100.369413ms
+<sendAppendEntries Failed> took 601.442217ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 401.089299ms
+<sendAppendEntries Failed> took 501.14783ms
+<sendAppendEntries Failed> took 501.150991ms
+<sendAppendEntries Failed> took 300.803896ms
+<sendAppendEntries Failed> took 400.723972ms
+<sendAppendEntries Failed> took 400.822541ms
+<sendAppendEntries Failed> took 300.559834ms
+<sendAppendEntries Failed> took 200.544621ms
+<sendAppendEntries Failed> took 301.119683ms
+<sendAppendEntries Failed> took 200.550446ms
+<sendAppendEntries Failed> took 200.516883ms
+<sendAppendEntries Failed> took 701.333168ms
+<sendAppendEntries Failed> took 100.255373ms
+<sendAppendEntries Failed> took 100.328734ms
+<sendAppendEntries Failed> took 100.321258ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 501.041472ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 601.115801ms
+<sendAppendEntries Failed> took 400.824146ms
+<sendAppendEntries Failed> took 501.083024ms
+<sendAppendEntries Failed> took 501.041587ms
+<sendAppendEntries Failed> took 300.735994ms
+<sendAppendEntries Failed> took 400.887887ms
+<sendAppendEntries Failed> took 400.758234ms
+<sendAppendEntries Failed> took 200.50489ms
+<sendAppendEntries Failed> took 300.606942ms
+<sendAppendEntries Failed> took 300.544495ms
+<sendAppendEntries Failed> took 801.610286ms
+<sendAppendEntries Failed> took 200.459875ms
+<sendAppendEntries Failed> took 200.471888ms
+<sendAppendEntries Failed> took 100.269736ms
+<sendAppendEntries Failed> took 100.272858ms
+<sendAppendEntries Failed> took 100.243567ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 703.450658ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 502.767017ms
+<sendAppendEntries Failed> took 400.75919ms
+<sendAppendEntries Failed> took 602.456022ms
+<sendAppendEntries Failed> took 501.267966ms
+<sendAppendEntries Failed> took 300.790947ms
+<sendAppendEntries Failed> took 502.773544ms
+<sendAppendEntries Failed> took 400.919813ms
+<sendAppendEntries Failed> took 400.95384ms
+<sendAppendEntries Failed> took 300.599557ms
+<sendAppendEntries Failed> took 200.481733ms
+<sendAppendEntries Failed> took 801.63071ms
+<sendAppendEntries Failed> took 300.467174ms
+<sendAppendEntries Failed> took 200.44063ms
+<sendAppendEntries Failed> took 200.353475ms
+<sendAppendEntries Failed> took 642.308308ms
+<sendAppendEntries Failed> took 100.217634ms
+<sendAppendEntries Failed> took 701.582495ms
+<sendAppendEntries Failed> took 100.251958ms
+<sendAppendEntries Failed> took 100.236007ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 501.007915ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 601.389646ms
+<sendAppendEntries Failed> took 400.976472ms
+<sendAppendEntries Failed> took 501.14177ms
+<sendAppendEntries Failed> took 501.264485ms
+<sendAppendEntries Failed> took 300.873398ms
+<sendAppendEntries Failed> took 400.618576ms
+<sendAppendEntries Failed> took 400.64929ms
+<sendAppendEntries Failed> took 801.270224ms
+<sendAppendEntries Failed> took 300.580356ms
+<sendAppendEntries Failed> took 300.629885ms
+<sendAppendEntries Failed> took 200.511515ms
+<sendAppendEntries Failed> took 200.327884ms
+<sendAppendEntries Failed> took 200.459305ms
+<sendAppendEntries Failed> took 100.220311ms
+<sendAppendEntries Failed> took 701.326875ms
+<sendAppendEntries Failed> took 100.34242ms
+<sendAppendEntries Failed> took 100.251425ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 500.90013ms
+<sendAppendEntries Failed> took 601.167467ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 401.07591ms
+<sendAppendEntries Failed> took 501.09276ms
+<sendAppendEntries Failed> took 501.174402ms
+<sendAppendEntries Failed> took 400.750041ms
+<sendAppendEntries Failed> took 300.943746ms
+<sendAppendEntries Failed> took 400.650392ms
+<sendAppendEntries Failed> took 200.451744ms
+<sendAppendEntries Failed> took 300.703463ms
+<sendAppendEntries Failed> took 300.710106ms
+<sendAppendEntries Failed> took 801.537551ms
+<sendAppendEntries Failed> took 200.376639ms
+<sendAppendEntries Failed> took 200.505632ms
+<sendAppendEntries Failed> took 100.237361ms
+<sendAppendEntries Failed> took 701.330205ms
+<sendAppendEntries Failed> took 100.334528ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 100.265192ms
+<sendAppendEntries Failed> took 500.915991ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 601.486593ms
+<sendAppendEntries Failed> took 400.877436ms
+<sendAppendEntries Failed> took 501.107637ms
+<sendAppendEntries Failed> took 501.156382ms
+<sendAppendEntries Failed> took 300.734686ms
+<sendAppendEntries Failed> took 400.648903ms
+<sendAppendEntries Failed> took 400.598463ms
+<sendAppendEntries Failed> took 300.494311ms
+<sendAppendEntries Failed> took 300.629512ms
+<sendAppendEntries Failed> took 200.36497ms
+<sendAppendEntries Failed> took 801.835353ms
+<sendAppendEntries Failed> took 200.470488ms
+<sendAppendEntries Failed> took 200.37098ms
+<sendAppendEntries Failed> took 100.327922ms
+<sendAppendEntries Failed> took 701.512154ms
+<sendAppendEntries Failed> took 100.356126ms
+<sendAppendEntries Failed> took 100.371472ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 500.813839ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 601.203526ms
+<sendAppendEntries Failed> took 400.968624ms
+<sendAppendEntries Failed> took 501.035474ms
+<sendAppendEntries Failed> took 501.212797ms
+<sendAppendEntries Failed> took 300.683392ms
+<sendAppendEntries Failed> took 400.459564ms
+<sendAppendEntries Failed> took 400.650419ms
+<sendAppendEntries Failed> took 300.592271ms
+<sendAppendEntries Failed> took 300.482271ms
+<sendAppendEntries Failed> took 200.381493ms
+<sendAppendEntries Failed> took 801.424993ms
+<sendAppendEntries Failed> took 200.437135ms
+<sendAppendEntries Failed> took 200.390336ms
+<sendAppendEntries Failed> took 100.315559ms
+<sendAppendEntries Failed> took 701.297611ms
+<sendAppendEntries Failed> took 100.246916ms
+<sendAppendEntries Failed> took 100.3359ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 500.863408ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 601.317142ms
+<sendAppendEntries Failed> took 400.883015ms
+<sendAppendEntries Failed> took 501.001998ms
+<sendAppendEntries Failed> took 501.073633ms
+<sendAppendEntries Failed> took 400.706992ms
+<sendAppendEntries Failed> took 300.940027ms
+<sendAppendEntries Failed> took 400.893863ms
+<sendAppendEntries Failed> took 300.492918ms
+<sendAppendEntries Failed> took 300.687185ms
+<sendAppendEntries Failed> took 801.434047ms
+<sendAppendEntries Failed> took 200.367807ms
+<sendAppendEntries Failed> took 590.253264ms
+<sendAppendEntries Failed> took 200.392707ms
+<sendAppendEntries Failed> took 200.370369ms
+<sendAppendEntries Failed> took 100.269054ms
+<sendAppendEntries Failed> took 701.391802ms
+<sendAppendEntries Failed> took 100.341473ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 100.221122ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 500.972044ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 601.171675ms
+<sendAppendEntries Failed> took 400.921875ms
+<sendAppendEntries Failed> took 500.990987ms
+<sendAppendEntries Failed> took 501.070178ms
+<sendAppendEntries Failed> took 300.757054ms
+<sendAppendEntries Failed> took 400.720723ms
+<sendAppendEntries Failed> took 400.624406ms
+<sendAppendEntries Failed> took 300.634641ms
+<sendAppendEntries Failed> took 801.459675ms
+<sendAppendEntries Failed> took 300.758828ms
+<sendAppendEntries Failed> took 200.356358ms
+<sendAppendEntries Failed> took 200.49105ms
+<sendAppendEntries Failed> took 200.582151ms
+<sendAppendEntries Failed> took 100.278841ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 780.252679ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 725.499426ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 884.257494ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 930.217551ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 875.254191ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 31.215422ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 286.237311ms
+<sendAppendEntries Failed> took 104.230181ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 843.29468ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.295286026s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.025443735s
+<sendAppendEntries Failed> took 116.461633ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.140390323s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.064331364s
+<sendAppendEntries Failed> took 344.362299ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 114.28584ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 171.248222ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 387.596051ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.167238539s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 214.318864ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 1.087368708s
+<sendAppendEntries Failed> took 438.267395ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.207641558s
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 419.244598ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 241.294298ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 306.386856ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 84.697125ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 166.243599ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.445293587s
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 1.496392223s
+<sendAppendEntries Failed> took 1.35439242s
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+OK1?????? from server 0 to server 1 : false
+server 0 send vote request to server 1 done
+<sendRequestVote Failed> took 1.553314917s
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 0 become a follower
+server 2 term 3 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 0 term 3 receive hb
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 0 term 3 receive hb
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 become a follower
+server 0 term 3 receive hb
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+[heartBeat: server 0 term 3 receive hb] chan sending
+server 0 term 3 receive hb
+server 0 become a follower
+[heartBeat: server 1 hb failed] for term is not latest, args.term 1, rf.term 3
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 307.319589ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 436.227439ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 634.664673ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 518.419089ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 264.412418ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 345.211478ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 335.650135ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 805.201319ms
+<sendAppendEntries Failed> took 345.35143ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 513.277192ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 507.265333ms
+<sendAppendEntries Failed> took 820.275264ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.855338779s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 840.254439ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.64228845s
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 1.857292397s
+<sendAppendEntries Failed> took 250.308575ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 0 term 3 not receive hb
+server 0 term 4 votefor wait 241ms time
+server 0 send vote request to server 2
+server 0 send vote request to server 0
+server 0 send vote request to server 1
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 634.407457ms
+<sendAppendEntries Failed> took 543.349179ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 827.640368ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 217.594465ms
+<sendAppendEntries Failed> took 496.29174ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 185.238618ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.030274646s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 139.350343ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 848.264886ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.003337416s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 376.400783ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 517.529542ms
+<sendAppendEntries Failed> took 209.317981ms
+OK1?????? from server 0 to server 2 : false
+server 0 send vote request to server 2 done
+<sendRequestVote Failed> took 107.661044ms
+<sendAppendEntries Failed> took 60.765668ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 749.411592ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 516.268551ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 997.251628ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 1.811272913s
+<sendAppendEntries Failed> took 1.005666013s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.75048036s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 905.361487ms
+<sendAppendEntries Failed> took 660.328085ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 854.217883ms
+<sendAppendEntries Failed> took 445.251252ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 566.300945ms
+<sendAppendEntries Failed> took 1.849340365s
+<sendAppendEntries Failed> took 1.177368681s
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 390.382219ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 890.366308ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.018293621s
+<sendAppendEntries Failed> took 734.703656ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 1.835399535s
+<sendAppendEntries Failed> took 493.283672ms
+<sendAppendEntries Failed> took 133.254576ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.070245997s
+<sendAppendEntries Failed> took 537.288513ms
+<sendAppendEntries Failed> took 167.232445ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 402.284562ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 849.678822ms
+<sendAppendEntries Failed> took 1.955311491s
+<sendAppendEntries Failed> took 1.191382855s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 744.255707ms
+<sendAppendEntries Failed> took 2.07737307s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 125.36215ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 568.295152ms
+<sendAppendEntries Failed> took 1.879369186s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 2.187265657s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 347.756018ms
+<sendAppendEntries Failed> took 646.407531ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 2.320579375s
+<sendAppendEntries Failed> took 1.920359992s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.086365532s
+<sendAppendEntries Failed> took 1.209764575s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 754.407697ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.082409668s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.054088015s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.106344024s
+<sendAppendEntries Failed> took 556.383444ms
+<sendAppendEntries Failed> took 936.240314ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 681.258148ms
+<sendAppendEntries Failed> took 848.262231ms
+<sendAppendEntries Failed> took 2.484265983s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.453241654s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+OK1?????? from server 0 to server 0 : false
+server 0 send vote request to server 0 done
+<sendRequestVote Failed> took 554.390394ms
+<sendAppendEntries Failed> took 1.110369487s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 2.374358531s
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 93.353837ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 2.119269727s
+<sendAppendEntries Failed> took 2.312391343s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 2.58836943s
+<sendAppendEntries Failed> took 1.2664064s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 391.628247ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 2.491019314s
+<sendAppendEntries Failed> took 925.543749ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.594366364s
+<sendAppendEntries Failed> took 140.279855ms
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.439564724s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 2.567434559s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.351321285s
+<sendAppendEntries Failed> took 706.722085ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 769.348499ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 52.296519ms
+<sendAppendEntries Failed> took 2.382147537s
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.626357003s
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 1.502241647s
+<sendAppendEntries Failed> took 621.28948ms
+<sendAppendEntries Failed> took 1.303261397s
+<sendAppendEntries Failed> took 388.303964ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 626.315946ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 592.418738ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 2.30137066s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 1.37440995s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 381.306454ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 646.606506ms
+<sendAppendEntries Failed> took 62.351436ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 2.817396694s
+<sendAppendEntries Failed> took 1.601424428s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 852.444414ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 127.361905ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 109.355138ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 1.534379923s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 2.439308198s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 91.428216ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 71.348539ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.064283648s
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+<sendAppendEntries Failed> took 171.242224ms
+<sendAppendEntries Failed> took 306.229056ms
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 330.661333ms
+<sendAppendEntries Failed> took 2.881522054s
+<sendAppendEntries Failed> took 2.706366499s
+<sendAppendEntries Failed> took 452.641272ms
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 650.361773ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+<sendAppendEntries Failed> took 1.137351999s
+<sendAppendEntries Failed> took 706.349575ms
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+<sendAppendEntries Failed> took 517.917467ms
+<sendAppendEntries Failed> took 655.355286ms
+<sendAppendEntries Failed> took 594.347986ms
+<sendAppendEntries Failed> took 1.807257189s
+server 1 term 1 send hb to server 2 and rf.status = 2
+server 2 term 3 send hb to server 1 and rf.status = 2
+server 2 term 3 send hb to server 0 and rf.status = 2
+server 1 term 1 send hb to server 0 and rf.status = 2
+--- FAIL: TestReElection (3.50s)
+    config.go:315: expected no leader, but 1 claims to be leader
+FAIL
+exit status 1
+FAIL	raft	3.506s
