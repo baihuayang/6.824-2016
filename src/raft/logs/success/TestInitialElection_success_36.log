@@ -1,0 +1,2768 @@
+Test:  initial election ...
+server 2 term 0 not receive hb
+server 2 term 1 votefor wait 171ms time
+server 2 send vote request to server 2
+server 2 send vote request to server 0
+server 2 send vote request to server 1
+server 0 term 0 not receive hb
+server 0 term 1 votefor wait 173ms time
+server 0 send vote request to server 2
+[get vote success] server 2 request with LastLogIndex = -1
+[get vote success] server 2 request with LastLogIndex = -1
+OK1?????? from server 2 to server 2 : true
+server 2 send vote request to server 2 done
+<sendRequestVote Successed> took 1.951671ms
+server 2 get vote from server 2 with rf.term = 1, reply.term = 1
+server 2 votenum = 1
+server 0 send vote request to server 0
+[get vote failed 3] server 0 args.term 1 vote for server 2 rf.currentTerm 1 request with LastLogIndex = -1 and votor votedFor = 2
+server 0 send vote request to server 1
+[get vote success] server 2 request with LastLogIndex = -1
+[back to follower] server 1
+OK1?????? from server 0 to server 2 : true
+server 0 send vote request to server 2 done
+<sendRequestVote Successed> took 1.323675ms
+server 0 get reply term = 0, voteGranted = false
+OK1?????? from server 2 to server 0 : true
+server 2 send vote request to server 0 done
+<sendRequestVote Successed> took 2.600657ms
+server 2 get vote from server 0 with rf.term = 1, reply.term = 1
+server 2 votenum = 2
+server 2 term 1 become leader with vote num = 2
+[get vote failed 3] server 0 args.term 1 vote for server 1 rf.currentTerm 1 request with LastLogIndex = -1 and votor votedFor = 2
+OK1?????? from server 0 to server 1 : true
+[get vote failed 3] server 0 args.term 1 vote for server 0 rf.currentTerm 1 request with LastLogIndex = -1 and votor votedFor = 2
+OK1?????? from server 2 to server 1 : true
+server 2 send vote request to server 1 done
+<sendRequestVote Successed> took 2.889444ms
+server 0 send vote request to server 1 done
+<sendRequestVote Successed> took 1.086871ms
+server 0 get reply term = 0, voteGranted = false
+server 2 get vote from server 1 with rf.term = 1, reply.term = 0
+server 2 votenum = 3
+server 2 term 1 become leader with vote num = 3
+OK1?????? from server 0 to server 0 : true
+server 0 send vote request to server 0 done
+<sendRequestVote Successed> took 1.392777ms
+server 0 get reply term = 0, voteGranted = false
+first heartBeat to 1
+server 2 term 1 send hb to server 1 and rf.status = 2
+first heartBeat to 0
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.138319ms
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.368599ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.106184ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.245492ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.202959ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.411024ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.000244ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.117383ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 904.188µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.161602ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 994.535µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.735158ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.185126ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.209522ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.17444ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.205536ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 938.704µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.283734ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 960.765µs
+server 2 term 1 send hb to server 1 done
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.140052ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.098079ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.247816ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 982.007µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 964.631µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 911.182µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.051593ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 973.497µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.038806ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.052979ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.325095ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 758.423µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 774.775µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.340933ms
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.613009ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.114532ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.270701ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.069015ms
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.268438ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 801.199µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.044609ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 991.496µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.147412ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 651.924µs
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 910.463µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.389745ms
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.304866ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 785.034µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 761.608µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.220318ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.178974ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 911.02µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.079833ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.363056ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.252573ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.126467ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.124492ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.247622ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.084503ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.232327ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.325492ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.404219ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.261658ms
+server 2 term 1 send hb to server 0 done
+[CheckOneLeader] server 0 is not leader
+[CheckOneLeader] server 1 is not leader
+[CheckOneLeader] server 2 is leader
+leader is 2 
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.013992ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.100226ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.072742ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.269874ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 934.094µs
+server 2 term 1 send hb to server 0 done
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.283081ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.145844ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.322979ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 0 become a follower
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.514682ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.403847ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.333846ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.392492ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.430491ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.315282ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.209553ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.110874ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 964.92µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.353884ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 become a follower
+server 0 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.188074ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.503793ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.048831ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.213643ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 960.751µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.084293ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 2.066976ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.926429ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.125998ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.083582ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.047003ms
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.244702ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.016623ms
+server 2 term 1 send hb to server 1 done
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.458883ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.052286ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.363665ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 965.749µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.195826ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 878.855µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.109444ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.051231ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.116074ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 738.563µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 888.49µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 935.482µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.022007ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.104454ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.319013ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 0 become a follower
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 827.567µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 900.491µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 1 term 1 receive hb
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.011301ms
+server 0 term 1 receive hb
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.15341ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 817.928µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 899.695µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.055942ms
+server 2 term 1 send hb to server 1 done
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.43152ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 652.023µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 572.045µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 818.628µs
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.04691ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 848.443µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.000449ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.297265ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.156741ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.00925ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.108171ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 855.375µs
+server 1 term 1 receive hb
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.034068ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.193397ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.156284ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.053751ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.198685ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.228631ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.181776ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 953.594µs
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.480831ms
+server 2 term 1 send hb to server 1 done
+server 1 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 949.372µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.260734ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 820.946µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 925.151µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.171808ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.083123ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 764.199µs
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.204574ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.000986ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.174202ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 741.685µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 931.505µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 0 become a follower
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 947.859µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.118256ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 749.4µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 807.018µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 821.976µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 977.024µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 994.906µs
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.018917ms
+server 2 term 1 send hb to server 1 done
+server 1 term 1 receive hb
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.017334ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.174145ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.136066ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.491516ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 2.773752ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 2.694061ms
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 915.162µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 884.184µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 978.721µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.024056ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 600.713µs
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 910.425µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 825.694µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 825.207µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 742.76µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 971.892µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 680.416µs
+server 2 term 1 send hb to server 1 done
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 812.17µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.075921ms
+server 2 term 1 send hb to server 1 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.025097ms
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 963.465µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 954.071µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.003382ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 990.948µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.326599ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.176349ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.054719ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.021615ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 0 become a follower
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.228796ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.210643ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 926.361µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 973.225µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 867.094µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 841.726µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 973.059µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.087182ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 992.032µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 904.869µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 648.066µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 629.575µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 806.948µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 963.157µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.030711ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.441484ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.016944ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 982.376µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 684.27µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 886.413µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.292765ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.470981ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.069801ms
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.107014ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.067027ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.007115ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 827.919µs
+server 2 term 1 send hb to server 1 done
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.118358ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 707.865µs
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.132142ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 974.259µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.162029ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.196509ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.294458ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 892.1µs
+server 2 term 1 send hb to server 0 done
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.204741ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 937.242µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.153793ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 765.809µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 938.342µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.368837ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.222467ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 947.532µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 963.553µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 892.087µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 993.282µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.257651ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.372503ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 868.752µs
+server 2 term 1 send hb to server 1 done
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.214308ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.11029ms
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.434481ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.031388ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.284866ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.26893ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.155863ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 952.038µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 964.336µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 840.845µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.169989ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 979.063µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.045353ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.226516ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.245751ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 591.211µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 722.658µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 952.467µs
+server 1 term 1 receive hb
+server 2 term 1 send hb to server 0 done
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.226117ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.111894ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.136717ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 958.154µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.148658ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 923.226µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.04957ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.101461ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.032442ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.109828ms
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.229511ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.094039ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.187826ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 961.907µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 956.661µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.039365ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.107981ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 994.403µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.005411ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 636.151µs
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 958.532µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.095887ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.183835ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.072208ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.051629ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 766.937µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 607.847µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 932.444µs
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.178076ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 655.24µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 767.684µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.07849ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.029462ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 936.25µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.05225ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 760.156µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 623.283µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 685.584µs
+server 2 term 1 send hb to server 1 done
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 759.129µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 641.587µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 874.027µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.112064ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.035834ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 788.84µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.034407ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 959.216µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.000836ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 894.952µs
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.477862ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.426037ms
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.310556ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 880.742µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 847.272µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.061145ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.032ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.190432ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.139208ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.102733ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.279126ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 759.926µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 880.584µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.078202ms
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.246701ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 873.238µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.054594ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.640086ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.472406ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 935.835µs
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.211705ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.233469ms
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.301176ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 983.346µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 995.876µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 898.125µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.174401ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 973.934µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.091343ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 933.418µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.211191ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.131416ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.055402ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.315573ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.379412ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 0 become a follower
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.338861ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.531668ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 941.115µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 993.993µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.164768ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.048981ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 969.581µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.183293ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.346959ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.107593ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.051678ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.122442ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.092802ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 987.267µs
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 849.951µs
+server 2 term 1 send hb to server 1 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.016825ms
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 3.260567ms
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 4.096477ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 847.169µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 612.229µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.055059ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.131084ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.277134ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.180125ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.218506ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.202835ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.181635ms
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.474033ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 997.64µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.055507ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.072767ms
+server 2 term 1 send hb to server 1 done
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.486601ms
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 924.801µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.072199ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 994.566µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 985.573µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.13467ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.223438ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 910.953µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.079764ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 559.106µs
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 958.284µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 961.344µs
+server 2 term 1 send hb to server 1 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 851.462µs
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.136947ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.109362ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.207689ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.172937ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.11961ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.168623ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 773.899µs
+server 2 term 1 send hb to server 0 done
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 923.333µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 984.415µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.039497ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 927.184µs
+server 2 term 1 send hb to server 0 done
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.479951ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.042436ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 955.81µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 992.654µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.055259ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.241852ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.138559ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.089526ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.082627ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 759.932µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 856.248µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.027679ms
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.238158ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 985.374µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 951.521µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 968.06µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.084037ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 893.659µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 840.995µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 774.467µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 934.524µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.04986ms
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.017259ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.009245ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.10431ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 861.632µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 917.16µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 959.357µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 935.178µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.369001ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.245997ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 930.476µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.084864ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.212199ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.106542ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 792.102µs
+server 2 term 1 send hb to server 1 done
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 971.034µs
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.3163ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.415538ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.059016ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.153964ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 922.401µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 869.674µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 729.489µs
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.057209ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 915.716µs
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.222497ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 818.074µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 896.387µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 929.962µs
+server 2 term 1 send hb to server 0 done
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 939.984µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.031913ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.163449ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 1 and rf.status = 2
+server 2 term 1 send hb to server 0 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.059159ms
+server 2 term 1 send hb to server 1 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.377354ms
+server 2 term 1 send hb to server 0 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 899.157µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 821.343µs
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 0 term 1 receive hb
+server 1 term 1 receive hb
+server 0 become a follower
+server 1 become a follower
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.03653ms
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.220304ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 1 term 1 receive hb
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 998.143µs
+server 2 term 1 send hb to server 0 done
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.001315ms
+server 2 term 1 send hb to server 1 done
+server 2 term 1 send hb to server 0 and rf.status = 2
+server 2 term 1 send hb to server 1 and rf.status = 2
+[heartBeat: server 0 term 1 receive hb] chan sending
+server 0 become a follower
+server 0 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 668.081µs
+server 2 term 1 send hb to server 0 done
+[heartBeat: server 1 term 1 receive hb] chan sending
+server 1 become a follower
+server 1 term 1 receive hb
+[heartBeat success from 2 to 2] <sendAppendEntries Failed> took 1.124214ms
+server 2 term 1 send hb to server 1 done
+  ... Passed
+PASS
+ok  	raft	2.504s

@@ -158,14 +158,8 @@ type AppendEntriesReply struct {
 // example RequestVote RPC handler.
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
-	//fmt.Printf("RequestVote before lock: from %v for %v vote\n", args.CandidateId, rf.me)
-	//fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
 	rf.mu.Lock()
-	//fmt.Printf("[Locked] RequestVote server %v\n", rf.me)
 	defer rf.mu.Unlock()
-	//defer fmt.Printf("[Unlocked] RequestVote server %v\n", rf.me)
-	//fmt.Printf("RequestVote locked: from %v for %v vote\n", args.CandidateId, rf.me)
-	//fmt.Println(args)
 	// Your code here.
 	if args.Term < rf.currentTerm {
 		reply.Term = rf.currentTerm
@@ -314,6 +308,8 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 	rf.heartbeatChan = make(chan bool)
 	// Your initialization code here.
 	rf.votedFor = -1
+	lens := len(peers)
+	hbChans := make([]chan bool, lens)
 	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
 	go func() {
 		for {
@@ -347,12 +343,15 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 				}
 			} else {
 				//leader code
-				time.Sleep(10 * time.Millisecond)
-				//
-				waitGroup := sync.WaitGroup{}
-				waitGroup.Add(len(peers))
+				//todo wrong code
+				//time.Sleep(10 * time.Millisecond)
 				for i := 0; i < len(peers); i++ {
-					go beginHeartBeat(i, me, rf, &waitGroup)
+					//if hbChans[i] == nil{
+					//	hbChans[i] = make(chan bool)
+					//}else{
+					//	<- hbChans[i]
+					//}
+					go beginHeartBeat(i, me, rf, hbChans)
 				}
 			}
 		}
@@ -364,8 +363,17 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 	return rf
 }
 
-func beginHeartBeat(i int, me int, rf *Raft, wg *sync.WaitGroup) {
+func beginHeartBeat(i int, me int, rf *Raft, hbChans[] chan bool) {
 	if i != me {
+		rf.mu.Lock()
+		if hbChans[i] == nil{
+			fmt.Printf("first heartBeat to %v\n", i)
+			hbChans[i] = make(chan bool)
+			rf.mu.Unlock()
+		}else{
+			rf.mu.Unlock()
+			<- hbChans[i]
+		}
 		lastLogTerm := 0
 		lastLogIndex := len(rf.log) - 1
 		if lastLogIndex >= 0 {
@@ -398,7 +406,9 @@ func beginHeartBeat(i int, me int, rf *Raft, wg *sync.WaitGroup) {
 			}
 		}
 	}
-	wg.Done()
+	go func(){
+		hbChans[i] <- true
+	}()
 }
 
 func beginVote(rf *Raft, me int, i int, peers []*labrpc.ClientEnd, wg *sync.WaitGroup) {
@@ -417,9 +427,7 @@ func beginVote(rf *Raft, me int, i int, peers []*labrpc.ClientEnd, wg *sync.Wait
 	if responseOk {
 		fmt.Printf("%s took %v\n", "<sendRequestVote Successed>", time.Since(start))
 		if reply.VoteGranted {
-			//fmt.Printf("[required Lock] sendAppendEntries server %v\n", rf.me)
 			rf.mu.Lock()
-			//fmt.Printf("[Locked] convert leader to follower server %v\n", rf.me)
 			rf.voteNumber += 1
 			fmt.Printf("server %v get vote from server %v with rf.term = %v, reply.term = %v\n", me, i, rf.currentTerm, reply.Term)
 			fmt.Printf("server %v votenum = %v\n", me, rf.voteNumber)
@@ -427,14 +435,8 @@ func beginVote(rf *Raft, me int, i int, peers []*labrpc.ClientEnd, wg *sync.Wait
 				//become leader  status = 2
 				rf.status = 2
 				fmt.Printf("server %v term %v become leader with vote num = %v\n", me, rf.currentTerm, rf.voteNumber)
-				//rf.mu.Unlock()
-				//wg.Done()
-				////fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
-				////break
-				//return
 			}
 			rf.mu.Unlock()
-			//fmt.Printf("[Unlocked] convert leader to follower server %v\n", rf.me)
 		} else {
 			fmt.Printf("server %v get reply term = %v, voteGranted = %v\n", me, reply.Term, reply.VoteGranted)
 		}

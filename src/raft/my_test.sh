@@ -1,7 +1,5 @@
 #!/bin/sh
 >result.txt
-mv logs/success/* logs/bak/success
-mv logs/fail/* logs/bak/fail
 if [ "$#" -ne 1 ]; then
     echo "Usage: args number must be 1"
     exit 1
