@@ -160,6 +160,8 @@ type AppendEntriesReply struct {
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+
+	//}
 	// Your code here.
 	if args.Term < rf.currentTerm {
 		reply.Term = rf.currentTerm
@@ -308,8 +310,6 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 	rf.heartbeatChan = make(chan bool)
 	// Your initialization code here.
 	rf.votedFor = -1
-	lens := len(peers)
-	hbChans := make([]chan bool, lens)
 	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
 	go func() {
 		for {
@@ -343,15 +343,9 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 				}
 			} else {
 				//leader code
-				//todo wrong code
 				//time.Sleep(10 * time.Millisecond)
 				for i := 0; i < len(peers); i++ {
-					//if hbChans[i] == nil{
-					//	hbChans[i] = make(chan bool)
-					//}else{
-					//	<- hbChans[i]
-					//}
-					go beginHeartBeat(i, me, rf, hbChans)
+					go beginHeartBeat(i, me, rf)
 				}
 			}
 		}
@@ -363,17 +357,8 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 	return rf
 }
 
-func beginHeartBeat(i int, me int, rf *Raft, hbChans[] chan bool) {
+func beginHeartBeat(i int, me int, rf *Raft) {
 	if i != me {
-		rf.mu.Lock()
-		if hbChans[i] == nil{
-			fmt.Printf("first heartBeat to %v\n", i)
-			hbChans[i] = make(chan bool)
-			rf.mu.Unlock()
-		}else{
-			rf.mu.Unlock()
-			<- hbChans[i]
-		}
 		lastLogTerm := 0
 		lastLogIndex := len(rf.log) - 1
 		if lastLogIndex >= 0 {
@@ -406,9 +391,6 @@ func beginHeartBeat(i int, me int, rf *Raft, hbChans[] chan bool) {
 			}
 		}
 	}
-	go func(){
-		hbChans[i] <- true
-	}()
 }
 
 func beginVote(rf *Raft, me int, i int, peers []*labrpc.ClientEnd, wg *sync.WaitGroup) {
