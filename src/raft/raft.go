@@ -326,7 +326,7 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 				//follower code
 				rand.Seed(time.Now().UnixNano())
 				// 150ms - 300ms random
-				ranN := time.Duration(rand.Intn(150) + 150)
+				ranN := time.Duration(rand.Intn(500) + 300)
 				//candidate or follower code
 				select {
 				case <-rf.heartbeatChan:
@@ -356,7 +356,7 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 				//similar to follower code
 				rand.Seed(time.Now().UnixNano())
 				// 150ms - 300ms random
-				ranN := time.Duration(rand.Intn(150) + 150)
+				ranN := time.Duration(rand.Intn(500) + 300)
 				//candidate or follower code
 				select {
 				case <-rf.heartbeatChan:
@@ -379,14 +379,14 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 					waitGroup := sync.WaitGroup{}
 					waitGroup.Add(len(peers))
 					for i := 0; i < len(peers); i++ {
-						go beginVote(rf, me, i, peers, &waitGroup)
+						go beginVote(rf, me, i, peers)
 					}
 					waitGroup.Wait()
 					break
 				}
 			} else {
 				//leader code
-				//time.Sleep(10 * time.Millisecond)
+				time.Sleep(100 * time.Millisecond)
 				for i := 0; i < len(peers); i++ {
 					go beginHeartBeat(i, me, rf)
 				}
