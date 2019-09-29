@@ -75,6 +75,9 @@ type Raft struct {
 	voteNumber int
 	voteChan chan bool
 
+	//become leader chan
+	becomeLeaderChan chan bool
+
 	//leader:2  candidate:1  follower:0
 	status int
 }
@@ -362,6 +365,9 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 				case <-rf.heartbeatChan:
 					fmt.Printf("server %d term %v receive hb\n", me, rf.currentTerm)
 					break
+				case <-rf.becomeLeaderChan:
+					fmt.Printf("server %d term %v become leader", me, rf.currentTerm)
+					break
 				case <-time.After(ranN * time.Millisecond):
 					fmt.Printf("server %v term %v not receive hb\n", me, rf.currentTerm)
 					//go to candidate
@@ -456,6 +462,9 @@ func beginVote(rf *Raft, me int, i int, peers []*labrpc.ClientEnd, wg *sync.Wait
 			if rf.voteNumber > len(peers)/2 {
 				//become leader  status = 2
 				rf.status = 2
+				defer func() {
+					rf.becomeLeaderChan<-true
+				}()
 				fmt.Printf("server %v term %v become leader with vote num = %v\n", me, rf.currentTerm, rf.voteNumber)
 			}
 			rf.mu.Unlock()
