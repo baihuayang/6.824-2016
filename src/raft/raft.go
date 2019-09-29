@@ -161,11 +161,12 @@ type AppendEntriesReply struct {
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	if rf.status == 0{
-		//only follower reset time count
-		rf.voteChan<-true
-	}
-	//}
+	defer func (){
+		if rf.status == 0{
+			//only follower reset time count
+			rf.voteChan<-true
+		}
+	}()
 	// Your code here.
 	if args.Term < rf.currentTerm {
 		reply.Term = rf.currentTerm
@@ -208,6 +209,9 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	defer func() {
+		rf.heartbeatChan <- true
+	}()
 	if len(args.Entries) == 0 {
 		//heartbeats
 		//reset time for candidate
@@ -218,8 +222,6 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 			return
 		}
 		fmt.Printf("[heartBeat: server %v term %v receive hb] chan sending\n", rf.me, rf.currentTerm)
-		// todo can rf.heartbeatChan <- true use go routines???
-		rf.heartbeatChan <- true
 		reply.Term = rf.currentTerm
 		reply.Success = true
 		if rf.currentTerm < args.Term {
