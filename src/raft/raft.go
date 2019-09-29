@@ -346,12 +346,9 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 					rf.voteNumber = 0
 					rf.mu.Unlock()
 					fmt.Printf("server %v term %v votefor wait %v time\n", me, rf.currentTerm, ranN * time.Millisecond)
-					waitGroup := sync.WaitGroup{}
-					waitGroup.Add(len(peers))
 					for i := 0; i < len(peers); i++ {
-						go beginVote(rf, me, i, peers, &waitGroup)
+						go beginVote(rf, me, i, peers)
 					}
-					waitGroup.Wait()
 					break
 				}
 			} else if rf.status == 1{
@@ -439,7 +436,7 @@ func beginHeartBeat(i int, me int, rf *Raft) {
 	}
 }
 
-func beginVote(rf *Raft, me int, i int, peers []*labrpc.ClientEnd, wg *sync.WaitGroup) {
+func beginVote(rf *Raft, me int, i int, peers []*labrpc.ClientEnd) {
 	lastLogTerm := 0
 	lastLogIndex := len(rf.log) - 1
 	if lastLogIndex >= 0 {
@@ -474,5 +471,4 @@ func beginVote(rf *Raft, me int, i int, peers []*labrpc.ClientEnd, wg *sync.Wait
 	} else {
 		fmt.Printf("%s took %v\n", "<sendRequestVote Failed>", time.Since(start))
 	}
-	wg.Done()
 }
