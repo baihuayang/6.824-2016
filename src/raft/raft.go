@@ -73,6 +73,7 @@ type Raft struct {
 
 	//voted number by others
 	voteNumber int
+	voteChan chan bool
 
 	//leader:2  candidate:1  follower:0
 	status int
@@ -160,7 +161,10 @@ type AppendEntriesReply struct {
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-
+	if rf.status == 0{
+		//only follower reset time count
+		rf.voteChan<-true
+	}
 	//}
 	// Your code here.
 	if args.Term < rf.currentTerm {
@@ -313,7 +317,41 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
 	go func() {
 		for {
-			if !(rf.status == 2) {
+			if rf.status == 0 {
+				//follower code
+				rand.Seed(time.Now().UnixNano())
+				// 150ms - 300ms random
+				ranN := time.Duration(rand.Intn(150) + 150)
+				//candidate or follower code
+				select {
+				case <-rf.heartbeatChan:
+					fmt.Printf("server %d term %v receive hb\n", me, rf.currentTerm)
+					break
+				case <-rf.voteChan:
+					fmt.Printf("server %d term %v receive vote request and reset timer count", me, rf.currentTerm)
+					break
+				case <-time.After(ranN * time.Millisecond):
+					fmt.Printf("server %v term %v not receive hb\n", me, rf.currentTerm)
+					//go to candidate
+					rf.mu.Lock()
+					rf.currentTerm += 1
+					rf.votedFor = -1
+					//become candidate(1)
+					rf.status = 1
+					rf.voteNumber = 0
+					rf.mu.Unlock()
+					fmt.Printf("server %v term %v votefor wait %v time\n", me, rf.currentTerm, ranN * time.Millisecond)
+					waitGroup := sync.WaitGroup{}
+					waitGroup.Add(len(peers))
+					for i := 0; i < len(peers); i++ {
+						go beginVote(rf, me, i, peers, &waitGroup)
+					}
+					waitGroup.Wait()
+					break
+				}
+			} else if rf.status == 1{
+				//candidate code
+				//similar to follower code
 				rand.Seed(time.Now().UnixNano())
 				// 150ms - 300ms random
 				ranN := time.Duration(rand.Intn(150) + 150)
