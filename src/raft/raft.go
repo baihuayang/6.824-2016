@@ -164,10 +164,13 @@ type AppendEntriesReply struct {
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	defer func (){
+	go func (){
 		if rf.status == 0{
 			//only follower reset time count
+			fmt.Printf("from %v to %v send voteChan begin\n", args.CandidateId, rf.me)
+			fmt.Printf("[RequestVote server receive %v now:%v]",rf.me,time.Now())
 			rf.voteChan<-true
+			fmt.Printf("from %v to %vsend voteChan done\n", args.CandidateId, rf.me)
 		}
 	}()
 	// Your code here.
@@ -178,6 +181,7 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 		return
 	}
 	//candidate begin a new term vote
+	//rf.voteChan<-true
 	if args.Term > rf.currentTerm {
 		fmt.Printf("[get vote success] server %v request with LastLogIndex = %v\n", args.CandidateId, args.LastLogIndex)
 		reply.Term = rf.currentTerm
@@ -212,7 +216,7 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	defer func() {
+	go func() {
 		rf.heartbeatChan <- true
 	}()
 	if len(args.Entries) == 0 {
@@ -310,13 +314,15 @@ func (rf *Raft) Kill() {
 // Make() must return quickly, so it should start goroutines
 // for any long-running work.
 //
-func  Make(peers []*labrpc.ClientEnd, me int,
+func Make(peers []*labrpc.ClientEnd, me int,
 	persister *Persister, applyCh chan ApplyMsg) *Raft {
 	rf := &Raft{}
 	rf.peers = peers
 	rf.persister = persister
 	rf.me = me
 	rf.heartbeatChan = make(chan bool)
+	rf.voteChan = make(chan bool)
+	rf.becomeLeaderChan = make(chan bool)
 	// Your initialization code here.
 	rf.votedFor = -1
 	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
@@ -325,18 +331,19 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 			if rf.status == 0 {
 				//follower code
 				rand.Seed(time.Now().UnixNano())
-				// 150ms - 300ms random
-				ranN := time.Duration(rand.Intn(500) + 300)
+				// 500ms - 1000ms random
+				ranN := time.Duration(rand.Intn(500) + 500)
 				//candidate or follower code
 				select {
 				case <-rf.heartbeatChan:
-					fmt.Printf("server %d term %v receive hb\n", me, rf.currentTerm)
+					fmt.Printf("[case heartbeatChan]server %d term %v receive hb\n", me, rf.currentTerm)
 					break
 				case <-rf.voteChan:
-					fmt.Printf("server %d term %v receive vote request and reset timer count", me, rf.currentTerm)
+					fmt.Printf("[case voteChan]server %d term %v receive vote request and reset timer count", me, rf.currentTerm)
 					break
 				case <-time.After(ranN * time.Millisecond):
-					fmt.Printf("server %v term %v not receive hb\n", me, rf.currentTerm)
+					fmt.Printf("[case revote server %v now:%v\n]",rf.me, time.Now())
+					fmt.Printf("[case revote]server %v term %v not receive hb\n", me, rf.currentTerm)
 					//go to candidate
 					rf.mu.Lock()
 					rf.currentTerm += 1
@@ -356,17 +363,17 @@ func  Make(peers []*labrpc.ClientEnd, me int,
 				//similar to follower code
 				rand.Seed(time.Now().UnixNano())
 				// 150ms - 300ms random
-				ranN := time.Duration(rand.Intn(500) + 300)
+				ranN := time.Duration(rand.Intn(500) + 500)
 				//candidate or follower code
 				select {
 				case <-rf.heartbeatChan:
-					fmt.Printf("server %d term %v receive hb\n", me, rf.currentTerm)
+					fmt.Printf("[case heartbeatChan2]server %d term %v receive hb\n", me, rf.currentTerm)
 					break
 				case <-rf.becomeLeaderChan:
-					fmt.Printf("server %d term %v become leader", me, rf.currentTerm)
+					fmt.Printf("[case becomeLeaderChan]server %d term %v become leader", me, rf.currentTerm)
 					break
 				case <-time.After(ranN * time.Millisecond):
-					fmt.Printf("server %v term %v not receive hb\n", me, rf.currentTerm)
+					fmt.Printf("[case revote2]server %v term %v not receive hb\n", me, rf.currentTerm)
 					//go to candidate
 					rf.mu.Lock()
 					rf.currentTerm += 1
