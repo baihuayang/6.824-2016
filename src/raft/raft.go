@@ -162,6 +162,7 @@ type AppendEntriesReply struct {
 // example RequestVote RPC handler.
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
+	fmt.Println("PPPPPPPPPPPPPPPPPP")
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 	go func (){
@@ -261,6 +262,7 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 // the struct itself.
 //
 func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *RequestVoteReply) bool {
+	fmt.Printf("[sendRequestVote] at time=%v\n", time.Now())
 	ok := rf.peers[server].Call("Raft.RequestVote", args, reply)
 	fmt.Printf("OK1?????? from server %v to server %v : %v\n", args.CandidateId, server, ok)
 	return ok
@@ -268,6 +270,7 @@ func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *Request
 
 func (rf *Raft) sendAppendEntries(server int, args AppendEntriesArgs, reply *AppendEntriesReply) bool {
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
+	fmt.Printf("OK2?????? from server %v to server %v : %v\n", args.LeaderId, server, ok)
 	return ok
 }
 
@@ -383,12 +386,9 @@ func Make(peers []*labrpc.ClientEnd, me int,
 					rf.voteNumber = 0
 					rf.mu.Unlock()
 					fmt.Printf("server %v term %v votefor wait %v time\n", me, rf.currentTerm, ranN * time.Millisecond)
-					waitGroup := sync.WaitGroup{}
-					waitGroup.Add(len(peers))
 					for i := 0; i < len(peers); i++ {
 						go beginVote(rf, me, i, peers)
 					}
-					waitGroup.Wait()
 					break
 				}
 			} else {
@@ -424,7 +424,7 @@ func beginHeartBeat(i int, me int, rf *Raft) {
 			rf.commitIndex}
 		reply := AppendEntriesReply{}
 		if rf.status == 2 {
-			fmt.Printf("server %v term %v send hb to server %v and rf.status = %v\n", rf.me, rf.currentTerm, i, rf.status)
+			fmt.Printf("server %v term %v send hb to server %v and rf.status = %v at time = %v\n", rf.me, rf.currentTerm, i, rf.status, time.Now())
 			start := time.Now()
 			responseOk := rf.sendAppendEntries(i, req, &reply)
 			if responseOk {
