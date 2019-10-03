@@ -213,7 +213,6 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 }
 
 // appendEntres RPC handler
-//todo think need lock???
 func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
@@ -226,6 +225,7 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 		if args.Term < rf.currentTerm {
 			fmt.Printf("[heartBeat: server %v hb failed] for term is not latest, args.term %v, rf.term %v\n",
 				args.LeaderId, args.Term, rf.currentTerm)
+			reply.Term = rf.currentTerm
 			reply.Success = false
 			return
 		}
@@ -240,7 +240,41 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 		rf.status = 0
 		return
 	} else {
+		if args.Term < rf.currentTerm {
+			fmt.Printf("[log entry: server %v failed] for term is not latest, args.term %v, rf.term %v\n",
+				args.LeaderId, args.Term, rf.currentTerm)
+			reply.Term = rf.currentTerm
+			reply.Success = false
+			return
+		}
 		//append entries
+		if len(rf.log) <= args.PrevLogIndex{
+			//do something
+			fmt.Println("do something")
+			return
+		}
+		logEntry := rf.log[args.PrevLogIndex].(LogEntry)
+		if logEntry.term != args.PrevLogTerm{
+			//remove PrevLogIndex -> ...
+			rf.log = rf.log[:args.PrevLogIndex]
+			//append new log
+			idx := args.PrevLogIndex
+			for _, le := range args.Entries{
+				rf.log[idx] = le
+				idx++
+			}
+			reply.Success = false
+			return
+		}
+		//todo 如果 leaderCommit > commitIndex，令 commitIndex 等于 leaderCommit 和 新日志条目索引值中较小的一个
+		if args.LeaderCommit > rf.commitIndex {
+			if args.LeaderCommit > len(rf.log)-1 {
+				rf.commitIndex = len(rf.log) - 1
+			}else{
+				rf.commitIndex = args.LeaderCommit
+			}
+		}
+
 	}
 }
 
@@ -320,6 +354,7 @@ func (rf *Raft) Kill() {
 func Make(peers []*labrpc.ClientEnd, me int,
 	persister *Persister, applyCh chan ApplyMsg) *Raft {
 	rf := &Raft{}
+	//about election init
 	rf.peers = peers
 	rf.persister = persister
 	rf.me = me
@@ -328,6 +363,10 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.becomeLeaderChan = make(chan bool)
 	// Your initialization code here.
 	rf.votedFor = -1
+	//about log init
+	rf.log = make([]interface{}, 16)
+	rf.nextIndex = make([]int, len(peers))
+	rf.matchIndex = make([]int, len(peers))
 	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
 	go func() {
 		for {
@@ -434,6 +473,7 @@ func beginHeartBeat(i int, me int, rf *Raft) {
 					rf.mu.Lock()
 					fmt.Printf("server %v become follower from leader\n", me)
 					rf.status = 0
+					rf.currentTerm = reply.Term
 					rf.mu.Unlock()
 				}
 			} else {
