@@ -364,7 +364,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	// Your initialization code here.
 	rf.votedFor = -1
 	//about log init
-	rf.log = make([]interface{}, 16)
+	rf.log = make([]interface{}, 0, 16)
 	rf.nextIndex = make([]int, len(peers))
 	rf.matchIndex = make([]int, len(peers))
 	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
