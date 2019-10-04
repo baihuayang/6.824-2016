@@ -320,14 +320,36 @@ func (rf *Raft) sendAppendEntries(server int, args AppendEntriesArgs, reply *App
 // if it's ever committed. the second return value is the current
 // term. the third return value is true if this server believes it is
 // the leader.
-//
+//todo what does the first return value should be
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	//Start(command) asks Raft to start the processing to append the command to the replicated log
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	if rf.status != 2{
+		//not a leader
+		return -1,-1,false
+	}
 	index := -1
-	term := -1
-	isLeader := true
-
-	return index, term, isLeader
+	//term := -1
+	//isLeader := true
+	prevLogIndex := len(rf.log)-1
+	index = prevLogIndex + 1
+	prevLogTerm := -1
+	if prevLogIndex >= 0{
+		log := rf.log[prevLogIndex].(LogEntry)
+		prevLogTerm = log.term
+	}
+	logs := []interface{}{command}
+	req := AppendEntriesArgs{
+		rf.currentTerm,
+		rf.me,
+		prevLogIndex,
+		prevLogTerm,
+		logs,
+		rf.commitIndex}
+	reply := AppendEntriesReply{}
+	rf.sendAppendEntries(rf.me, req, &reply)
+	return index, rf.currentTerm, true
 }
 
 //
