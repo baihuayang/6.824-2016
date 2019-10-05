@@ -213,12 +213,12 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 
 // appendEntres RPC handler
 func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-	go func() {
-		rf.heartbeatChan <- true
-	}()
 	if len(args.Entries) == 0 {
+		fmt.Println("POINNNN")
+		rf.mu.Lock()
+		go func() {
+			rf.heartbeatChan <- true
+		}()
 		//heartbeats
 		//reset time for candidate
 		if args.Term < rf.currentTerm {
@@ -237,8 +237,10 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 		//anyway become follower
 		//fmt.Printf("server %v become a follower\n", rf.me)
 		rf.status = 0
+		rf.mu.Unlock()
 		return
 	} else {
+		fmt.Println("77")
 		if args.Term < rf.currentTerm {
 			fmt.Printf("[log entry: server %v failed] for term is not latest, args.term %v, rf.term %v\n",
 				args.LeaderId, args.Term, rf.currentTerm)
@@ -247,23 +249,43 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 			return
 		}
 		//append entries
+		//leader prevLogIndex is too large
 		if len(rf.log) <= args.PrevLogIndex{
+			fmt.Println("len(rf.log) <= args.PrevLogIndex and return")
 			//do something
 			//fmt.Println("do something")
-			return
-		}
-		logEntry := rf.log[args.PrevLogIndex].(LogEntry)
-		if logEntry.term != args.PrevLogTerm{
-			//remove PrevLogIndex -> ...
-			rf.log = rf.log[:args.PrevLogIndex]
-			//append new log
-			idx := args.PrevLogIndex
-			for _, le := range args.Entries{
-				rf.log[idx] = le
-				idx++
-			}
 			reply.Success = false
 			return
+		}
+		fmt.Printf("args.PrevLogIndex = %v\n", args.PrevLogIndex)
+		if args.PrevLogIndex < 0{
+			//first log entry
+			if len(rf.log) > args.PrevLogIndex+1{
+				rf.log = rf.log[:args.PrevLogIndex+1]
+			}
+			for _, le := range args.Entries{
+				rf.log = append(rf.log, le)
+			}
+			reply.Success = true
+		}else{
+			fmt.Printf("rf.log[args.PrevLogIndex].(LogEntry) = %v\n", rf.log[args.PrevLogIndex])
+			logEntry := rf.log[args.PrevLogIndex].(LogEntry)
+			if logEntry.term != args.PrevLogTerm{
+				fmt.Println("false 1111")
+				//remove PrevLogIndex -> ...
+				rf.log = rf.log[:args.PrevLogIndex]
+				//append new log
+				reply.Success = false
+				return
+			}else{
+				if len(rf.log) > args.PrevLogIndex+1{
+					rf.log = rf.log[:args.PrevLogIndex+1]
+				}
+				for _, le := range args.Entries{
+					rf.log = append(rf.log, le)
+				}
+				reply.Success = true
+			}
 		}
 		//todo 如果 leaderCommit > commitIndex，令 commitIndex 等于 leaderCommit 和 新日志条目索引值中较小的一个
 		if args.LeaderCommit > rf.commitIndex {
@@ -301,8 +323,14 @@ func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *Request
 }
 
 func (rf *Raft) sendAppendEntries(server int, args AppendEntriesArgs, reply *AppendEntriesReply) bool {
+	if len(args.Entries) == 0{
+		fmt.Println("777777777777777")
+	}
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
 	//fmt.Printf("OK2?????? from server %v to server %v : %v\n", args.LeaderId, server, ok)
+	if len(args.Entries) == 0{
+		fmt.Println("88888888888888888")
+	}
 	return ok
 }
 
@@ -318,7 +346,6 @@ func (rf *Raft) sendAppendEntries(server int, args AppendEntriesArgs, reply *App
 // if it's ever committed. the second return value is the current
 // term. the third return value is true if this server believes it is
 // the leader.
-//todo what does the first return value should be
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	//Start(command) asks Raft to start the processing to append the command to the replicated log
 	rf.mu.Lock()
@@ -327,17 +354,35 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 		//not a leader
 		return -1,-1,false
 	}
+	//add to leader first
+	newLog := LogEntry{command, rf.currentTerm}
+	rf.log = append(rf.log, newLog)
 	index := -1
-	//term := -1
-	//isLeader := true
-	prevLogIndex := len(rf.log)-1
-	index = prevLogIndex + 1
-	prevLogTerm := -1
-	if prevLogIndex >= 0{
-		log := rf.log[prevLogIndex].(LogEntry)
-		prevLogTerm = log.term
+	for i := 0; i < len(rf.peers); i++ {
+		//term := -1
+		//isLeader := true
+		fmt.Printf("rf.log len = %v\n",len(rf.log))
+		if rf.me == i{
+			continue
+		}
+		index = rf.nextIndex[i]
+		index = rf.sendLog(index, command, i)
 	}
-	logs := []interface{}{command}
+	//todo what should first return value be
+	return index, rf.currentTerm, true
+}
+
+func (rf *Raft) sendLog(index int, command interface{}, i int) int {
+	fmt.Printf("sendLog with index %d\n", index)
+	log := rf.log[index].(LogEntry)
+	log.term = rf.currentTerm
+	prevLogIndex := index - 1
+	prevLogTerm := -1
+	if prevLogIndex >= 0 {
+		prevLog := rf.log[prevLogIndex].(LogEntry)
+		prevLogTerm = prevLog.term
+	}
+	logs := []interface{}{LogEntry{command, rf.currentTerm}}
 	req := AppendEntriesArgs{
 		rf.currentTerm,
 		rf.me,
@@ -346,8 +391,19 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 		logs,
 		rf.commitIndex}
 	reply := AppendEntriesReply{}
-	rf.sendAppendEntries(rf.me, req, &reply)
-	return index, rf.currentTerm, true
+	fmt.Println("33")
+	if len(req.Entries) == 0{
+		fmt.Println("5555555555555")
+	}
+	rf.sendAppendEntries(i, req, &reply)
+	if reply.Success {
+		rf.nextIndex[i] = rf.nextIndex[i] + 1
+	} else {
+		//--nextIndex and retry
+		fmt.Println("retrying")
+		index = rf.sendLog(index-1, command, i)
+	}
+	return index
 }
 
 //
@@ -384,7 +440,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	// Your initialization code here.
 	rf.votedFor = -1
 	//about log init
-	rf.log = make([]interface{}, 0, 16)
+	rf.log = make([]interface{}, 0)
 	rf.nextIndex = make([]int, len(peers))
 	rf.matchIndex = make([]int, len(peers))
 	// if can not receive info (heartbeat) from others(leader) change to candidate for vote
@@ -505,6 +561,7 @@ func beginHeartBeat(i int, me int, rf *Raft) {
 
 func beginVote(rf *Raft, me int, i int, peers []*labrpc.ClientEnd) {
 	lastLogTerm := 0
+	fmt.Printf("lastLogIndex = %v\n", len(rf.log) - 1)
 	lastLogIndex := len(rf.log) - 1
 	if lastLogIndex >= 0 {
 		lastLog := rf.log[lastLogIndex].(LogEntry)
