@@ -214,7 +214,7 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 // appendEntres RPC handler
 func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
 	if len(args.Entries) == 0 {
-		fmt.Println("POINNNN")
+		fmt.Println("[AppendEntries] len(args.Entries)==0")
 		rf.mu.Lock()
 		go func() {
 			rf.heartbeatChan <- true
@@ -240,9 +240,9 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 		rf.mu.Unlock()
 		return
 	} else {
-		fmt.Println("77")
+		fmt.Println("[AppendEntries] len(args.Entries)!=0")
 		if args.Term < rf.currentTerm {
-			fmt.Printf("[log entry: server %v failed] for term is not latest, args.term %v, rf.term %v\n",
+			fmt.Printf("[AppendEntries failed 1] [log entry: server %v failed] for term is not latest, args.term %v, rf.term %v\n",
 				args.LeaderId, args.Term, rf.currentTerm)
 			reply.Term = rf.currentTerm
 			reply.Success = false
@@ -250,8 +250,8 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 		}
 		//append entries
 		//leader prevLogIndex is too large
-		if len(rf.log) <= args.PrevLogIndex{
-			fmt.Println("len(rf.log) <= args.PrevLogIndex and return")
+		if len(rf.log) < args.PrevLogIndex{
+			fmt.Println("[AppendEntries failed 2] len(rf.log) < args.PrevLogIndex and return")
 			//do something
 			//fmt.Println("do something")
 			reply.Success = false
@@ -271,7 +271,7 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 			fmt.Printf("rf.log[args.PrevLogIndex].(LogEntry) = %v\n", rf.log[args.PrevLogIndex])
 			logEntry := rf.log[args.PrevLogIndex].(LogEntry)
 			if logEntry.term != args.PrevLogTerm{
-				fmt.Println("false 1111")
+				fmt.Println("[AppendEntries failed 3]false 1111")
 				//remove PrevLogIndex -> ...
 				rf.log = rf.log[:args.PrevLogIndex]
 				//append new log
@@ -325,6 +325,8 @@ func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *Request
 func (rf *Raft) sendAppendEntries(server int, args AppendEntriesArgs, reply *AppendEntriesReply) bool {
 	if len(args.Entries) == 0{
 		fmt.Println("777777777777777")
+	}else{
+		fmt.Println("999999999999999")
 	}
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
 	//fmt.Printf("OK2?????? from server %v to server %v : %v\n", args.LeaderId, server, ok)
@@ -391,9 +393,10 @@ func (rf *Raft) sendLog(index int, command interface{}, i int) int {
 		logs,
 		rf.commitIndex}
 	reply := AppendEntriesReply{}
-	fmt.Println("33")
 	if len(req.Entries) == 0{
-		fmt.Println("5555555555555")
+		fmt.Println("len(req.Entries) == 0")
+	} else {
+		fmt.Println("len(req.Entries) != 0")
 	}
 	rf.sendAppendEntries(i, req, &reply)
 	if reply.Success {
