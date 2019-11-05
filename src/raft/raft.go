@@ -150,7 +150,8 @@ type AppendEntriesArgs struct {
 	LeaderId     int
 	PrevLogIndex int
 	PrevLogTerm  int
-	Entries      []interface{}
+	//Entries      []interface{}
+	Entries      []LogEntry
 	LeaderCommit int
 }
 
@@ -389,7 +390,10 @@ func (rf *Raft) sendLog(index int, command interface{}, i int) int {
 		prevLog := rf.log[prevLogIndex].(LogEntry)
 		prevLogTerm = prevLog.Term
 	}
-	logs := []interface{}{LogEntry{command, rf.currentTerm}}
+	var logs []LogEntry
+	n := LogEntry{Command: command, Term:rf.currentTerm}
+	logs = append(logs, n)
+	//logs := []interface{}{LogEntry{command, rf.currentTerm}}
 	req := AppendEntriesArgs{
 		rf.currentTerm,
 		rf.me,
