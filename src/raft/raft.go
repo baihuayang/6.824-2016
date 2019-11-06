@@ -217,8 +217,7 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 // appendEntres RPC handler
 func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
 	if len(args.Entries) == 0 {
-		fmt.Printf("[AppendEntries rpc] args : %v\n", args)
-		fmt.Println("[AppendEntries rpc] len(args.Entries)==0")
+		//fmt.Printf("[AppendEntries heartbeat] args : %v\n", args)
 		rf.mu.Lock()
 		go func() {
 			rf.heartbeatChan <- true
@@ -244,8 +243,7 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 		rf.mu.Unlock()
 		return
 	} else {
-		fmt.Println("[AppendEntries rpc] len(args.Entries)!=0")
-		fmt.Printf("[AppendEntries rpc args2=%v", args)
+		fmt.Printf("[AppendEntries logentry=%v", args)
 		if args.Term < rf.currentTerm {
 			fmt.Printf("[AppendEntries failed 1] [log entry: server %v failed] for term is not latest, args.term %v, rf.term %v\n",
 				args.LeaderId, args.Term, rf.currentTerm)
@@ -273,7 +271,7 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
 			}
 			reply.Success = true
 		}else{
-			fmt.Printf("rf.log[args.PrevLogIndex].(LogEntry) = %v\n", rf.log[args.PrevLogIndex])
+			//fmt.Printf("rf.log[args.PrevLogIndex].(LogEntry) = %v\n", rf.log[args.PrevLogIndex])
 			logEntry := rf.log[args.PrevLogIndex].(LogEntry)
 			if logEntry.Term != args.PrevLogTerm{
 				fmt.Println("[AppendEntries failed 3]false 1111")
@@ -328,17 +326,8 @@ func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *Request
 }
 
 func (rf *Raft) sendAppendEntries(server int, args AppendEntriesArgs, reply *AppendEntriesReply) bool {
-	if len(args.Entries) == 0{
-		fmt.Println("777777777777777")
-	}else{
-		fmt.Printf("AppendEntriesArgs %v\n", args)
-		fmt.Println("999999999999999")
-	}
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
 	//fmt.Printf("OK2?????? from server %v to server %v : %v\n", args.LeaderId, server, ok)
-	if len(args.Entries) == 0{
-		fmt.Println("88888888888888888")
-	}
 	return ok
 }
 
@@ -402,12 +391,6 @@ func (rf *Raft) sendLog(index int, command interface{}, i int) int {
 		logs,
 		rf.commitIndex}
 	reply := AppendEntriesReply{}
-	if len(req.Entries) == 0{
-		fmt.Println("len(req.Entries) == 0")
-	} else {
-		fmt.Println("len(req.Entries) != 0")
-	}
-	time.Sleep(10 * time.Second)
 	rf.sendAppendEntries(i, req, &reply)
 	if reply.Success {
 		rf.nextIndex[i] = rf.nextIndex[i] + 1

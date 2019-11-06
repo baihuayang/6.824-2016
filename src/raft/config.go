@@ -332,6 +332,7 @@ func (cfg *config) nCommitted(index int) (int, interface{}) {
 		cfg.mu.Unlock()
 
 		if ok {
+			fmt.Println("666666666666")
 			if count > 0 && cmd != cmd1 {
 				cfg.t.Fatalf("committed values do not match: index %v, %v, %v\n",
 					index, cmd, cmd1)
@@ -404,13 +405,14 @@ func (cfg *config) one(cmd int, expectedServers int) int {
 				}
 			}
 		}
-
 		if index != -1 {
+			fmt.Printf("TTTTTTTTTTTTTTTTTTTTT index=%v\n", index)
 			// somebody claimed to be the leader and to have
 			// submitted our command; wait a while for agreement.
 			t1 := time.Now()
 			for time.Since(t1).Seconds() < 2 {
 				nd, cmd1 := cfg.nCommitted(index)
+				//fmt.Printf("[one] nd=%v cmd1=%v",nd, cmd1)
 				if nd > 0 && nd >= expectedServers {
 					// committed
 					if cmd2, ok := cmd1.(int); ok && cmd2 == cmd {
@@ -421,6 +423,7 @@ func (cfg *config) one(cmd int, expectedServers int) int {
 				time.Sleep(20 * time.Millisecond)
 			}
 		} else {
+			fmt.Println("xxxxxxxxxxxxxxx")
 			time.Sleep(50 * time.Millisecond)
 		}
 	}

@@ -45,4 +45,6 @@ question
 last two are for leaders
 
 
+question 
 
+问题在于cfg.log 一直没有赋值，应该有一个地方会commit
