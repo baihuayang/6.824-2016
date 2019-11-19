@@ -48,3 +48,8 @@ last two are for leaders
 question 
 
 问题在于cfg.log 一直没有赋值，应该有一个地方会commit
+
+先到这里告一段落，2019.11.19
+完成内容
+lab1 全部
+lab2 选举
